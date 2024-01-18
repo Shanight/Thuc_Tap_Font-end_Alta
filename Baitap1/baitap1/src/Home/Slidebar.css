@@ -1,0 +1,27 @@
+.sidebar{
+    background-color: rgb(2, 2, 32);
+    text-align: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.logo{
+    background-color: white;
+    border-radius: 1000px;
+    height: 80px;
+    width: 80px;
+    margin-top: 20px;
+}
+.side{
+    display: flex;
+    justify-content: center;
+}
+.play{
+    color: rgb(200, 200, 219);
+    box-sizing:border-box;
+}
+.buttonslide{
+    color: rgb(200, 200, 219);
+    margin-top: 20px;
+    height: 30px;
+    width: 100%;
+}
