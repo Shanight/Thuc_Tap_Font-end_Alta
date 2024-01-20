@@ -1,4 +1,4 @@
-.login{
+.login {
     background-color: rgb(30, 30, 46);
     min-height: 100vh;
     display: flex;
@@ -8,48 +8,57 @@
     font-size: calc(10px + 2vmin);
     color: white;
 }
-.main{
+
+.main {
     text-align: center;
 }
-.logo{
+
+.logo {
     height: 150px;
     width: 150px;
     background-color: white;
     border-radius: 100px;
 }
-.form-control{
+
+.form-control {
     background-color: rgb(43, 43, 63);
-    border:none;
+    border: none;
     color: white;
     width: 400px;
 }
-.form-control:focus{
+
+.form-control:focus {
     background-color: rgb(43, 43, 63);
     color: white;
 }
-.form-label{
+
+.form-label {
     text-align: left;
     font-size: 14px;
     color: rgb(187, 187, 192);
 }
-.mb-3{
+
+.mb-3 {
     text-align: left;
     color: rgb(187, 187, 192);
     width: 100%;
     margin-top: 10px;
 }
-.form-check-input{
+
+.form-check-input {
     background: none;
     border: 1px solid blue;
     width: 20px;
     height: 20px;
 }
-.form-check-label{
+
+.form-check-label {
     font-size: 14px;
     margin-top: 5px;
     margin-left: 10px;
 }
-.button{
+
+.button {
     background-color: rgb(255, 117, 6);
     color: white;
     height: 40px;
@@ -57,11 +66,13 @@
     border-radius: 10px;
     font-size: 15px;
 }
-.form-check{
+
+.form-check {
     display: flex;
     align-items: center;
 }
-.bottom{
+
+.bottom {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -69,8 +80,37 @@
     padding: 20px;
     text-align: center;
     font-size: 15px;
-    
+
 }
-.quenmk{
+
+.quenmk {
     color: rgb(255, 117, 6);
+}
+
+.eye {
+    border: none;
+    background-color: rgb(43, 43, 63);
+    border-radius: 10px;
+    color: rgb(255, 117, 6);
+    font-size: 15px;
+}
+
+.has-error {
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+.invalid-feedback {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.loisaiten {
+    text-align: left;
+    font-size: 13px;
+    color: red;
+}
+.displaynone{
+    display: none;
 }

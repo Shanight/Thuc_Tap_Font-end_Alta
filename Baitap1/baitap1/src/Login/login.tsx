@@ -1,39 +1,57 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 import "./login.css";
-import { getAuth, signInWithEmailAndPassword,onAuthStateChanged  } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../firebase";
 import Home from "../Home/Home";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      const uid = user.uid;
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
-  const login1 = async (event: { preventDefault: () => void; }) => {
+  const navigate = useNavigate();
+  //chức năng nút đăng nhập, lấy dữ liệu từ firebase và đối chiếu với nó, nếu thành công thì sẽ đăng nhập
+  const login1 = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    const email = (document.getElementById("emaildn") as HTMLInputElement).value;
-    const password = (document.getElementById("password") as HTMLInputElement).value;
+    const email = (document.getElementById("emaildn") as HTMLInputElement)
+      .value;
+    const password = (document.getElementById("password") as HTMLInputElement)
+      .value;
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        setLoginError(false);
+        navigate('/');
         console.log("Thành công");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("Thất bại");
+        const loginError = false;
+        if(email=="" && password==""){
+          setLoginError1(!loginError1);
+        }else{
+          setLoginError(!loginError);
+        }
       });
   };
-  
+  //end đăng nhập
+
+  //hiện password đã nhập
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+  //end hiện password
+
+  const [loginError, setLoginError] = useState(false);
+  const [loginError1, setLoginError1] = useState(false);
 
   return (
     <div className="login">
@@ -42,26 +60,40 @@ const Login = () => {
         <img src={logo} alt="" className="logo" />
         <h3>Đăng nhập</h3>
         <form>
-          <div className="mb-3">
+          <div className={`mb-3 ${loginError ? "" : ""}`}>
             <label htmlFor="emaildn" className="form-label">
               Tên đăng nhập
             </label>
             <input
               type="email"
-              className="form-control"
+              className={`form-control ${loginError ? "has-error" : ""} ${loginError1 ? "has-error" : ""}`}
               id="emaildn"
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-3">
+
+          <div className={`mb-3 ${loginError ? "" : ""}`}>
             <label htmlFor="password" className="form-label">
               Password
             </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-            />
+            <div className={`input-group ${loginError ? "has-error":""} ${loginError1 ? "has-error" : ""}`}>
+              <input
+                type={showPassword ? "text" : "password"} 
+                className={`form-control`}
+                id="password"
+              />
+              <button
+                className="eye"
+                type="button"
+                onClick={handleTogglePassword}
+              >
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </button>
+            </div>
+          </div>
+          <div className="loisaiten">
+            {loginError ? <div className={`${loginError1 ? 'displaynone' : '' }`}>Sai tên đăng nhập hoặc mật khẩu</div> : ""}
+            {loginError1 ? <div className={`${loginError ? '' : 'displaynone' }`}>Vui lòng nhập tên đăng nhập và mật khẩu</div> : ""}
           </div>
           <div className="mb-3 form-check">
             <input
