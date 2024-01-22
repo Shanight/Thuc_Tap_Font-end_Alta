@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Sidebar from './Slidebar';
 import { getAuth, signOut, onAuthStateChanged, User } from 'firebase/auth';
+import Topbar from './topbar';
 
 const auth = getAuth();
 
@@ -40,6 +41,7 @@ function Home() {
 
   return (
     <div className="app">
+      <Topbar />
       <div className="row">
         <div className="col-2">
           <Sidebar />

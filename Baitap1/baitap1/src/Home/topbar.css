@@ -1,0 +1,20 @@
+.topbar {
+    text-align: right;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.topbarbutton1 {
+    border-radius: 4px;
+    border: 1px solid #C8C8DB;
+    background-color: transparent;
+    border-radius: 4px;
+    color: white;
+    font-size: 15px;
+    gap: 8px;
+    margin-top: 24px;
+    margin-right: 80px;
+}
