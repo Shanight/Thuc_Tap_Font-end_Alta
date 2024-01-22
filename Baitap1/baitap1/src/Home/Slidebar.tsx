@@ -5,8 +5,6 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
 
 const Sidebar = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
   //Lấy ảnh từ firebase
   const [logoUrl, setLogoUrl] = useState("");
   const [settingIconUrl, setSettingIconUrl] = useState("");
@@ -57,8 +55,7 @@ const Sidebar = () => {
         <img src={logoUrl} alt="Logo" className="logohome" />
       </div>
 
-      <div className="row play" style={{ marginTop: "70px" }} onMouseEnter={() => setIsHovered(true)}
-  onMouseLeave={() => setIsHovered(false)}>
+      <div className="row play" style={{ marginTop: "70px" }}>
         <img src={BanghiiconRef} alt="Setting Icon" className="icon" />
         <p className="texticon">Kho bản ghi</p>
       </div>

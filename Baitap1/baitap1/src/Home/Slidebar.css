@@ -1,33 +1,38 @@
-.sidebar{
+.sidebar {
     background-color: rgb(2, 2, 32);
     text-align: center;
     align-items: center;
     min-height: 100vh;
 }
-.logohome{
+
+.logohome {
     background-color: white;
     border-radius: 1000px;
     height: 80px;
     width: 80px;
     margin-top: 20px;
 }
-.side{
+
+.side {
     display: flex;
     justify-content: center;
-    
+
 }
-.play{
+
+.play {
     color: rgb(200, 200, 219);
     display: flex;
     justify-content: center;
 }
-.buttonslide{
+
+.buttonslide {
     color: rgb(200, 200, 219);
     margin-top: 20px;
     height: 30px;
     width: 100%;
 }
-.icon{
+
+.icon {
     width: 50px;
     margin-top: 11px;
     color: black;
@@ -36,9 +41,10 @@
 
 .row.play {
     font-size: 14px;
-  }
+}
 
-  .row.play:hover{
+.row.play:hover {
     /* Kiểu dáng văn bản khi con chuột nhập vào */
-    color: orange; /* Đổi màu chữ thành màu cam */
-  }
+    color: orange;
+    /* Đổi màu chữ thành màu cam */
+}
