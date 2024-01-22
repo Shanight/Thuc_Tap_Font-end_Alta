@@ -4,7 +4,7 @@
     align-items: center;
     min-height: 100vh;
 }
-.logo{
+.logohome{
     background-color: white;
     border-radius: 1000px;
     height: 80px;
@@ -14,10 +14,12 @@
 .side{
     display: flex;
     justify-content: center;
+    
 }
 .play{
     color: rgb(200, 200, 219);
-    box-sizing:border-box;
+    display: flex;
+    justify-content: center;
 }
 .buttonslide{
     color: rgb(200, 200, 219);
@@ -25,3 +27,18 @@
     height: 30px;
     width: 100%;
 }
+.icon{
+    width: 50px;
+    margin-top: 11px;
+    color: black;
+}
+
+
+.row.play {
+    font-size: 14px;
+  }
+
+  .row.play:hover{
+    /* Kiểu dáng văn bản khi con chuột nhập vào */
+    color: orange; /* Đổi màu chữ thành màu cam */
+  }

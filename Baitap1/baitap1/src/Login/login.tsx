@@ -1,17 +1,12 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import logo from "../logo.svg";
 import "./login.css";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../firebase";
-import Home from "../Home/Home";
-import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth, storage } from "../firebase";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Topbar from "../Home/topbar";
+import { getDownloadURL, ref } from "firebase/storage";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,16 +23,12 @@ const Login = () => {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          const user = userCredential.user;
           setLoginError(false);
           navigate("/");
           console.log("Thành công");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
           const loginError = false;
-
           setLoginError(!loginError);
         });
     }
@@ -52,6 +43,19 @@ const Login = () => {
   };
   //end hiện password
 
+  //Lấy ảnh logo từ firebase
+  const [logoUrl, setLogoUrl] = useState("");
+  useEffect(() => {
+    const logoRef = ref(storage, "images/logo.png");
+    getDownloadURL(logoRef)
+      .then((url) => {
+        setLogoUrl(url);
+      })
+      .catch((error) => {
+        console.log("Error getting logo URL:", error);
+      });
+  }, []);
+  //end lấy ảnh
   const [loginError, setLoginError] = useState(false);
   const [loginError1, setLoginError1] = useState(false);
 
@@ -61,7 +65,7 @@ const Login = () => {
       <div className="login">
         <div className="slidebartop"></div>
         <div className="main">
-          <img src={logo} alt="" className="logo" />
+          <img src={logoUrl} alt="" className="logo" />
           <h3>Đăng nhập</h3>
           <form>
             <div className={`mb-3 ${loginError ? "" : ""}`}>

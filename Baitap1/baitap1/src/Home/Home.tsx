@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Home.css';
-import Sidebar from './Slidebar';
-import { getAuth, signOut, onAuthStateChanged, User } from 'firebase/auth';
-import Topbar from './topbar';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Home.css";
+import Sidebar from "./Slidebar";
+import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";
+import Topbar from "./topbar";
 
 const auth = getAuth();
 
@@ -18,7 +18,7 @@ function Home() {
         setUser(user);
       } else {
         // Người dùng đã đăng xuất
-        navigate('/login'); // Chuyển hướng đến trang "Login"
+        navigate("/login"); // Chuyển hướng đến trang "Login"
       }
     });
 
@@ -31,23 +31,22 @@ function Home() {
     signOut(auth)
       .then(() => {
         // Đăng xuất thành công
-        navigate('/login'); // Chuyển hướng đến trang "Login"
+        navigate("/login"); // Chuyển hướng đến trang "Login"
       })
       .catch((error) => {
         // Xử lý lỗi nếu có
         console.log(error);
       });
   };
-
   return (
     <div className="app">
       <Topbar />
-      <div className="row">
-        <div className="col-2">
+      <div className="displayflex">
+        <div className="slidebar">
           <Sidebar />
         </div>
-        <div className="col-10">
-          <div>Welcome, {user ? user.email : ''}</div>
+        <div className="main">
+          <div>Welcome, {user ? user.email : ""}</div>
           <button onClick={handleSignOut}>Đăng xuất</button>
         </div>
       </div>

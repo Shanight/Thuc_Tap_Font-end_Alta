@@ -4,6 +4,14 @@
   color: white;
 }
 
-.row {
-  width: 100%;
+.sidebar {
+  width: 170px;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.displayflex {
+  display: flex;
 }
