@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import "./Playlist.css";
 import Sidebar from "../slidebar/Slidebar";
 import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";
 import Topbar from "../slidebar/topbar";
 
 const auth = getAuth();
 
-function Home() {
+function Playlist() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
 
@@ -46,7 +46,9 @@ function Home() {
           <Sidebar />
         </div>
         <div className="main">
+          
           <div>Welcome, {user ? user.email : ""}</div>
+          <h1>Playlist</h1>
           <button onClick={handleSignOut}>Đăng xuất</button>
         </div>
       </div>
@@ -54,4 +56,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Playlist;

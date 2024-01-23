@@ -35,16 +35,25 @@
 .icon {
     width: 50px;
     margin-top: 11px;
-    color: black;
 }
 
 
 .row.play {
     font-size: 14px;
+    width: 120%;
+    background: none;
+    border: none;
 }
 
-.row.play:hover {
-    /* Kiểu dáng văn bản khi con chuột nhập vào */
+.link.active {
     color: orange;
-    /* Đổi màu chữ thành màu cam */
+}
+
+.button-margin.active {
+    border-left: 18px solid orange;
+    border-right: 18px solid rgb(30, 30, 46);
+}
+
+.link{
+    text-decoration: none;
 }

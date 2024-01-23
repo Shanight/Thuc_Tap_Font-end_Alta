@@ -1,0 +1,17 @@
+.app {
+  background-color: rgb(30, 30, 46);
+  min-height: 100vh;
+  color: white;
+}
+
+.sidebar {
+  width: 170px;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.displayflex {
+  display: flex;
+}

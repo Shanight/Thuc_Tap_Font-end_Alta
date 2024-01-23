@@ -5,7 +5,7 @@ import { auth, storage } from "../firebase";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import Topbar from "../Home/topbar";
+import Topbar from "../slidebar/topbar";
 import { getDownloadURL, ref } from "firebase/storage";
 
 const Login = () => {
