@@ -10,8 +10,55 @@
 
 .main {
   flex-grow: 1;
+  margin-top: 80px;
+  margin-left: 40px;
 }
 
 .displayflex {
   display: flex;
+}
+
+.search{
+  background-color: rgb(43, 43, 63);
+  width: 400px;
+}
+
+.theloai{
+  align-items: center;
+    justify-content: left;
+    display: flex;
+}
+.iconhome{
+  justify-content: right;
+}
+.iconhomeicon{
+  font-size: 32px;
+  margin-left: 15px;
+  color: rgb(255, 117, 6);
+}
+.dropdownhome{
+  margin-left: 10px;
+}
+.dropdownbutton{
+  background: none;
+  border: 1px solid rgb(255, 117, 6);
+  color: white;
+}
+.dropdownbutton:focus{
+  background: none;
+  border: 1px solid rgb(255, 117, 6);
+  color: white;
+}
+.test1{
+  margin-top: 15px;
+}
+.sanpham{
+  background-color: rgb(43, 43, 63);
+  width: 85%;
+  border-radius: 10px;
+  height: 700px;
+}
+.sanphamchitiet{
+  margin-top: 10px;
+  border: 1px solid red;
 }

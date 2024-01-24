@@ -9,10 +9,6 @@
     color: white;
 }
 
-.main {
-    text-align: center;
-}
-
 .logo {
     height: 150px;
     width: 150px;
@@ -114,4 +110,7 @@
 
 .displaynone {
     display: none;
+}
+.mainlogin{
+    text-align: center;
 }

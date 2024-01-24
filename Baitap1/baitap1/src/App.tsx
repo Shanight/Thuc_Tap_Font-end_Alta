@@ -11,6 +11,7 @@ import Home from "./Home/Home";
 import Login from "./Login/login";
 import Playlist from "./playlist/Playlist";
 import Calendar from "./calendar/calendar";
+import Resetpass from './Login/resetpasssword';
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/calendar" element={<Calendar />} />
+        <Route path="/login/resetpass" element={<Resetpass />} />
         <Route
           path="*"
           element={

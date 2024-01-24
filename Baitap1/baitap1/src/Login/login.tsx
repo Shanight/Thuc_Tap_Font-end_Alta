@@ -10,6 +10,8 @@ import { getDownloadURL, ref } from "firebase/storage";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loginError, setLoginError] = useState(false);
+  const [loginError1, setLoginError1] = useState(false);
   //chức năng nút đăng nhập, lấy dữ liệu từ firebase và đối chiếu với nó, nếu thành công thì sẽ đăng nhập
   const login1 = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -17,8 +19,9 @@ const Login = () => {
       .value;
     const password = (document.getElementById("password") as HTMLInputElement)
       .value;
-    if (email == "" && password == "") {
+    if (email === "" && password === "") {
       setLoginError1(!loginError1);
+      console.log("khongtenkomk")
     } else {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, email, password)
@@ -30,6 +33,7 @@ const Login = () => {
         .catch((error) => {
           const loginError = false;
           setLoginError(!loginError);
+          console.log("thatbai")
         });
     }
   };
@@ -56,17 +60,14 @@ const Login = () => {
       });
   }, []);
   //end lấy ảnh
-  const [loginError, setLoginError] = useState(false);
-  const [loginError1, setLoginError1] = useState(false);
+  
 
   return (
-    <div>
+    <div className="login">
       <Topbar />
-      <div className="login">
-        <div className="slidebartop"></div>
-        <div className="main">
+        <div className="mainlogin">
           <img src={logoUrl} alt="" className="logo" />
-          <h3>Đăng nhập</h3>
+          <h3 style={{marginTop:"20px"}}>Đăng nhập</h3>
           <form>
             <div className={`mb-3 ${loginError ? "" : ""}`}>
               <label htmlFor="emaildn" className="form-label">
@@ -107,14 +108,14 @@ const Login = () => {
             </div>
             <div className="loisaiten">
               {loginError ? (
-                <div className={`${loginError1 ? "displaynone" : ""}`}>
+                <div className={`${loginError1 ? "" : "displaynone"}`}>
                   Sai tên đăng nhập hoặc mật khẩu
                 </div>
               ) : (
                 ""
               )}
               {loginError1 ? (
-                <div className={`${loginError ? "" : "displaynone"}`}>
+                <div className={`${loginError ? "displaynone" : ""}`}>
                   Vui lòng nhập tên đăng nhập và mật khẩu
                 </div>
               ) : (
@@ -136,12 +137,11 @@ const Login = () => {
             </button>
           </form>
           <div className="bottom">
-            <a href="../" className="quenmk">
+            <a href="../login/resetpass" className="quenmk">
               Quên mật khẩu?
             </a>
           </div>
         </div>
-      </div>
     </div>
   );
 };
