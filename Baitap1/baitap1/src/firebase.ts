@@ -24,10 +24,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 export const firebase = getDatabase(app);
-const auth = getAuth(app);
-const storage = getStorage(app);
+export const auth = getAuth(app);
+export const storage = getStorage(app);
 export const googleProvider = new GoogleAuthProvider();
-export { auth, storage };
 
 export const passwordReset = async (email: string) => {
   return await sendPasswordResetEmail(auth, email)

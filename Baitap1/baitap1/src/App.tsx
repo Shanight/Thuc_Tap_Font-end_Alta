@@ -43,7 +43,6 @@ function App() {
         <Route
           path="*"
           element={
-            // Use Navigate component to conditionally redirect the user
             auth.currentUser ? <Navigate to="/" /> : <Navigate to="/login" />
           }
         />

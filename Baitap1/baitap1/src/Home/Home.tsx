@@ -202,34 +202,35 @@ function Home() {
             </div>
           </div>
           <div className="row sanpham">
-            <tr className="sanphamchitiet">
-              <tr style={{fontSize:"13px", lineHeight:"20px", fontWeight:"700", color:"#FFAC69"}}>
+            <div className="sanphamchitiet">
+              <tr style={{fontSize:"13px", lineHeight:"20px", fontWeight:"700", color:"#FFAC69", width:"100%"}}>
                 <td width={"5%"}>STT</td>
-                <td width={"14%"}>Tên bản ghi</td>
-                <td width={"10%"}>Mã ISRC</td>
+                <td width={"13%"}>Tên bản ghi</td>
+                <td width={"11%"}>Mã ISRC</td>
                 <td width={"8%"}>Thời lượng</td>
                 <td width={"11%"}>Ca sĩ</td>
-                <td width={"11%"}>Tác giả</td>
+                <td width={"13%"}>Tác giả</td>
                 <td width={"8%"}>Thể loại</td>
                 <td width={"9%"}>Định dạng</td>
                 <td width={"12%"}>Thời hạn sử dụng</td>
-                <td width={"6%"}></td>
-                <td width={"6%"}></td>
+                <td width={"8%"}></td>
+                <td width={"9%"}></td>
               </tr>
-              <tr style={{fontFamily:"Montserrat",fontSize:"13px",lineHeight:"20px"}}>
+              <tr style={{fontFamily:"Montserrat",fontSize:"13px",lineHeight:"20px", width:"100%"}}>
                 <td width={"5%"}>1</td>
-                <td width={"14%"}>Mất em</td>
-                <td width={"10%"}>KRA40105463</td>
+                <td width={"13%"}>Mất em</td>
+                <td width={"11%"}>KRA40105463</td>
                 <td width={"8%"}>04:27</td>
                 <td width={"11%"}>Phan Mạnh Quỳnh</td>
-                <td width={"11%"}>Phan Mạnh Quỳnh</td>
+                <td width={"13%"}>Phan Mạnh Quỳnh</td>
                 <td width={"8%"}>Ballad</td>
                 <td width={"9%"}>Audio</td>
-                <td width={"12%"}>Còn thời hạn 02/10/2019</td>
-                <td width={"6%"}><a href="/capnhat">Cập nhật</a></td>
-                <td width={"6%"}><a href="/nghe">Nghe</a></td>
+                <td width={"12%"}><span>Còn thời hạn</span> <p>02/10/2019</p></td>
+                <td width={"8%"}><a href="/capnhat">Cập nhật</a></td>
+                <td width={"9%"}><a href="/nghe">Nghe</a></td>
               </tr>
-            </tr>
+              
+            </div>
           </div>
 
           <div>Welcome, {user ? user.email : ""}</div>
