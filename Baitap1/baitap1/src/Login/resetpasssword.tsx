@@ -3,12 +3,13 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../firebase";
 import Topbar from "../slidebar/topbar";
 import { sendPasswordResetEmail } from "firebase/auth";
+import "./resetpass.css";
 
 const Resetpass = () => {
   const handleResetPassword = () => {
     const email = (document.getElementById("emaildn") as HTMLInputElement)
       .value;
-    console.log(email)
+    console.log(email);
     sendPasswordResetEmail(auth, email);
   };
 
@@ -30,22 +31,37 @@ const Resetpass = () => {
       <Topbar />
       <div className="mainlogin">
         <img src={logoUrl} alt="" className="logo" />
-        <h3 style={{ marginTop: "20px" }}>Đổi mật khẩu</h3>
+        <h3
+          style={{
+            marginTop:"15px",
+            fontFamily: "Montserrat",
+            fontSize: "36px",
+            fontWeight: "700",
+            lineHeight: "48px",
+            letterSpacing: "-0.002em",
+          }}
+        >
+          Khôi phục mật khẩu
+        </h3>
+        <p style={{fontSize:"16px"}}>
+          Vui lòng nhập địa chỉ email đã đăng ký để yêu cầu khôi phục mật khẩu
+        </p>
         <form>
           <div className="mb-3">
             <label htmlFor="emaildn" className="form-label">
-              Tên đăng nhập
+              Email
             </label>
             <input
               type="email"
               className="form-control"
               id="emaildn"
               aria-describedby="emailHelp"
+              style={{width:"100%"}}
             />
           </div>
 
           <button className="button" onClick={handleResetPassword}>
-            Gửi
+            Xác nhận
           </button>
         </form>
         <div className="bottom">

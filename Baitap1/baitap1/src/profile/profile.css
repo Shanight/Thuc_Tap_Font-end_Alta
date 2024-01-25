@@ -1,0 +1,25 @@
+.tieude {
+    font-family: Montserrat;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: -0.002em;
+    text-align: left;
+}
+
+.thongtinchitietprofile {
+    width: 1018px;
+    height: 528px;
+    top: 188px;
+    left: 229px;
+    border: 1px solid red;
+}
+
+.profileimage {
+    width: 273px;
+    height: 280px;
+    left: 2px;
+    border-radius: 200px;
+    background-color: white;
+
+}

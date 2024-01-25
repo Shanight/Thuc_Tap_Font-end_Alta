@@ -61,7 +61,7 @@ function Home() {
                 placeholder="Tên bản ghi, ca sĩ,..."
                 aria-label="Search"
               />
-              <button className="searchicon" type="button">
+              <button className="searchicon" type="button" style={{background:"none", border:"none", color:"white"}}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
               </button>
             </form>
@@ -203,31 +203,31 @@ function Home() {
           </div>
           <div className="row sanpham">
             <tr className="sanphamchitiet">
-              <tr>
+              <tr style={{fontSize:"13px", lineHeight:"20px", fontWeight:"700", color:"#FFAC69"}}>
                 <td width={"5%"}>STT</td>
                 <td width={"14%"}>Tên bản ghi</td>
                 <td width={"10%"}>Mã ISRC</td>
                 <td width={"8%"}>Thời lượng</td>
-                <td width={"10%"}>Ca sĩ</td>
-                <td width={"10%"}>Tác giả</td>
+                <td width={"11%"}>Ca sĩ</td>
+                <td width={"11%"}>Tác giả</td>
                 <td width={"8%"}>Thể loại</td>
                 <td width={"9%"}>Định dạng</td>
                 <td width={"12%"}>Thời hạn sử dụng</td>
-                <td width={"7%"}></td>
-                <td width={"7%"}></td>
+                <td width={"6%"}></td>
+                <td width={"6%"}></td>
               </tr>
-              <tr>
+              <tr style={{fontFamily:"Montserrat",fontSize:"13px",lineHeight:"20px"}}>
                 <td width={"5%"}>1</td>
                 <td width={"14%"}>Mất em</td>
                 <td width={"10%"}>KRA40105463</td>
                 <td width={"8%"}>04:27</td>
-                <td width={"10%"}>Phan Mạnh Quỳnh</td>
-                <td width={"10%"}>Phan Mạnh Quỳnh</td>
+                <td width={"11%"}>Phan Mạnh Quỳnh</td>
+                <td width={"11%"}>Phan Mạnh Quỳnh</td>
                 <td width={"8%"}>Ballad</td>
                 <td width={"9%"}>Audio</td>
                 <td width={"12%"}>Còn thời hạn 02/10/2019</td>
-                <td width={"7%"}><a href="/capnhat">Cập nhật</a></td>
-                <td width={"7%"}><a href="/nghe">Nghe</a></td>
+                <td width={"6%"}><a href="/capnhat">Cập nhật</a></td>
+                <td width={"6%"}><a href="/nghe">Nghe</a></td>
               </tr>
             </tr>
           </div>

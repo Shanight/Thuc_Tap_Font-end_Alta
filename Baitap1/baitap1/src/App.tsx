@@ -12,6 +12,8 @@ import Login from "./Login/login";
 import Playlist from "./playlist/Playlist";
 import Calendar from "./calendar/calendar";
 import Resetpass from './Login/resetpasssword';
+import Profile from "./profile/profile";
+
 
 function App() {
   useEffect(() => {
@@ -37,6 +39,7 @@ function App() {
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/login/resetpass" element={<Resetpass />} />
+        <Route path="/profile" element={<Profile />} />
         <Route
           path="*"
           element={

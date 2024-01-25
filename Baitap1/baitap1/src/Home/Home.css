@@ -10,7 +10,7 @@
 
 .main {
   flex-grow: 1;
-  margin-top: 80px;
+  margin-top: 5%;
   margin-left: 40px;
 }
 
@@ -21,12 +21,14 @@
 .search{
   background-color: rgb(43, 43, 63);
   width: 400px;
+  border-radius: 10px;
 }
 
 .theloai{
   align-items: center;
     justify-content: left;
     display: flex;
+
 }
 .iconhome{
   justify-content: right;
@@ -54,11 +56,15 @@
 }
 .sanpham{
   background-color: rgb(43, 43, 63);
-  width: 85%;
+  width: 88%;
   border-radius: 10px;
-  height: 700px;
+  height: Fixed (1,541px);
+  width: Fixed (722px);
+  
 }
 .sanphamchitiet{
+  width: Fixed (1,485px);
+  min-height: 400px;
+  padding: 16px, 24px, 16px, 24px;
   margin-top: 10px;
-  border: 1px solid red;
 }

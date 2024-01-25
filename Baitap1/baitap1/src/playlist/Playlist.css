@@ -4,9 +4,6 @@
   color: white;
 }
 
-.sidebar {
-  width: 170px;
-}
 
 .main {
   flex-grow: 1;
