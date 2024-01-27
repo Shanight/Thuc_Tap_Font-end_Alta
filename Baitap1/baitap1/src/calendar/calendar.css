@@ -8,9 +8,7 @@
   width: 140px;
 }
 
-.main {
-  flex-grow: 1;
-}
+
 
 .displayflex {
   display: flex;

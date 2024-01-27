@@ -55,11 +55,12 @@ function Home() {
           </div>
           <div className="row">
             <form className="d-flex mt-3 search" role="search">
-              <Input
+              <input
                 className="form-control me-2 labelsearch bg-transparent focus:bg-transparent border-none hover:bg-transparent placeholder:text-[#727288] focus:ring-0 h-full text-base font-normal font-['Montserrat'] leading-normal"
                 type="search"
                 placeholder="Tên bản ghi, ca sĩ,..."
                 aria-label="Search"
+                
               />
               <button className="searchicon" type="button" style={{background:"none", border:"none", color:"white"}}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />

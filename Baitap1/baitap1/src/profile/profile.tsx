@@ -4,14 +4,28 @@ import "./profile.css";
 import Sidebar from "../slidebar/Slidebar";
 import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";
 import Topbar from "../slidebar/topbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { faList } from "@fortawesome/free-solid-svg-icons";
-import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
-import { Input } from "antd";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
+
 const auth = getAuth();
 
 function Profile() {
+  const [cameraRef, setCameraUrl] = useState("");
+
+  useEffect(() => {
+    //Lấy ảnh
+    const cameraRef = ref(storage, "icon/fi_camera.png");
+
+    Promise.all([getDownloadURL(cameraRef)])
+      .then((urls) => {
+        setCameraUrl(urls[0]);
+      })
+      .catch((error) => {
+        console.log("Error getting URLs:", error);
+      });
+  }, []);
+  //end lấy ảnh
+
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
 
@@ -56,83 +70,93 @@ function Profile() {
           <div className="row thongtinchitietprofile">
             <div className="col-6">
               <img src="./logo192.png" alt="" className="profileimage" />
+              <img src={cameraRef} alt="" className="profileimage2" />
+              <p
+                style={{
+                  color: "#F5F5FF",
+                  marginTop: "15px",
+                  marginLeft: "85px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "600",
+                  fontSize: "20px",
+                  lineHeight: "24px",
+                }}
+              >
+                Tuyết Nguyễn
+              </p>
             </div>
             <div className="col-6">
               <form className="row g-3">
                 <div className="col-md-6">
-                  <label htmlFor="inputEmail4" className="form-label">
-                    Email
+                  <label htmlFor="inputtext" className="form-label">
+                    Họ:
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control profile"
+                    id="inputtext"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inputten" className="form-label">
+                    Tên:
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control profile"
+                    id="inputten"
+                  />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="inputdate" className="form-label">
+                    Ngày sinh:
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control profile"
+                    id="inputdate"
+                  />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="inputAddress2" className="form-label">
+                    Số điện thoại:
+                  </label>
+                  <input
+                    type="tel"
+                    className="form-control profile"
+                    id="inputAddress2"
+                  />
+                </div>
+                <div className="col-md-12">
+                  <label htmlFor="inputCity" className="form-label">
+                    Email:
                   </label>
                   <input
                     type="email"
-                    className="form-control"
-                    id="inputEmail4"
+                    className="form-control profile disabledprofile"
+                    disabled
                   />
                 </div>
-                <div className="col-md-6">
-                  <label htmlFor="inputPassword4" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="inputPassword4"
-                  />
-                </div>
-                <div className="col-12">
-                  <label htmlFor="inputAddress" className="form-label">
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputAddress"
-                    placeholder="1234 Main St"
-                  />
-                </div>
-                <div className="col-12">
-                  <label htmlFor="inputAddress2" className="form-label">
-                    Address 2
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputAddress2"
-                    placeholder="Apartment, studio, or floor"
-                  />
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="inputCity" className="form-label">
-                    City
-                  </label>
-                  <input type="text" className="form-control" id="inputCity" />
-                </div>
-                <div className="col-md-4">
+                <div className="col-md-12">
                   <label htmlFor="inputState" className="form-label">
-                    State
+                    Tên đăng nhập:
                   </label>
-                  <select id="inputState" className="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
+                  <input
+                    type="text"
+                    className="form-control profile disabledprofile"
+                    disabled
+                  />
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-6">
                   <label htmlFor="inputZip" className="form-label">
-                    Zip
+                    Vai trò
                   </label>
-                  <input type="text" className="form-control" id="inputZip" />
-                </div>
-                <div className="col-12">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="gridCheck"
-                    />
-                    <label className="form-check-label" htmlFor="gridCheck">
-                      Check me out
-                    </label>
-                  </div>
+                  <input
+                    type="text"
+                    className="form-control profile disabledprofile"
+                    id="inputZip"
+                    disabled
+                  />
                 </div>
                 <div className="col-12">
                   <button type="submit" className="btn btn-primary">
@@ -142,9 +166,6 @@ function Profile() {
               </form>
             </div>
           </div>
-
-          <div>Welcome, {user ? user.email : ""}</div>
-          <button onClick={handleSignOut}>Đăng xuất</button>
         </div>
       </div>
     </div>

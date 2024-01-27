@@ -23,3 +23,23 @@
     background-color: white;
 
 }
+.form-control.profile{
+    background-color: rgb(43, 43, 63);
+    border: none;
+    color: white;
+    width: 100%;
+}
+.disabledprofile{
+    background-color: rgb(62, 62, 80) !important;
+
+}
+.profileimage2{
+    width: 30px;
+    height: 30px;
+    left: 380px;
+    top: 360px;
+    border-radius: 200px;
+    background-color: rgba(0, 0, 0, 0.336);
+    display: flex;
+    position: absolute;
+}

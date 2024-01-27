@@ -9,14 +9,17 @@ const Topbar = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [user, setUser] = useState<User | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // Người dùng đã đăng nhập
         setUser(user);
+        setIsLoggedIn(true);
+
       } else {
         // Người dùng đã đăng xuất
-        navigate("/login"); // Chuyển hướng đến trang "Login"
+        setIsLoggedIn(false);
       }
     });
 
