@@ -5,7 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged} from "firebase/auth";
 import { auth } from "./firebase";
 import Home from "./Home/Home";
 import Login from "./Login/login";
@@ -13,7 +13,21 @@ import Playlist from "./playlist/Playlist";
 import Calendar from "./calendar/calendar";
 import Resetpass from './Login/resetpasssword';
 import Profile from "./profile/profile";
-
+import DanhSachHopDong from "./QuanLy/DanhSachHopDong";
+import QuanLyThietBi from "./QuanLy/QuanLyThietBi";
+import QuanLyUyQuyen from "./QuanLy/QuanLyUyQuyen";
+import QuanlySuDung from "./QuanLy/QuanLySuDung";
+import BaoCaoDoanhThu from "./DoanhThu/BaoCaoDoanhThu";
+import LichSuDoiSoat from "./DoanhThu/LichSuDoiSoat";
+import PhanPhoiDoanhThu from "./DoanhThu/PhanPhoiDoanhThu";
+import PhanQuyenNguoiDung from "./CaiDat/PhanQuyenNguoiDung";
+import CauHinh from "./CaiDat/CauHinh";
+import QuanLyHopDongCaiDat from "./CaiDat/QuanLyHopDongCaiDat";
+import ThongTinSanPham from "./CaiDat/ThongTinSanPham";
+import ChuKyDoiSoat from "./CaiDat/ChuKyDoiSoat";
+import HuongDanSuDung from "./HoTro/HuongDanSuDung";
+import TaiApp from "./HoTro/TaiApp";
+import Feedback from "./HoTro/Feedback";
 
 function App() {
   useEffect(() => {
@@ -40,6 +54,22 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/login/resetpass" element={<Resetpass />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/quanlyhopdong" element={<DanhSachHopDong />} />
+        <Route path="/quanlysudung" element={<QuanlySuDung />} />
+        <Route path="/quanlythietbi" element={<QuanLyThietBi />} />
+        <Route path="/quanlyuyquyen" element={<QuanLyUyQuyen />} />
+        <Route path="/baocaodoanhthu" element={<BaoCaoDoanhThu />} />
+        <Route path="/lichsudoisoat" element={<LichSuDoiSoat />} />
+        <Route path="/phanphoidoanhthu" element={<PhanPhoiDoanhThu />} />
+
+        <Route path="/phanquyennguoidung" element={<PhanQuyenNguoiDung />} />
+        <Route path="/cauhinh" element={<CauHinh />} />
+        <Route path="/quanlyhopdongcaidat" element={<QuanLyHopDongCaiDat />} />
+        <Route path="/thongtinsanpham" element={<ThongTinSanPham />} />
+        <Route path="/chukydoisoat" element={<ChuKyDoiSoat />} />
+        <Route path="/huongdansudung" element={<HuongDanSuDung />} />
+        <Route path="/taiapp" element={<TaiApp />} />
+        <Route path="/feedback" element={<Feedback />} />
         <Route
           path="*"
           element={
