@@ -2,10 +2,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./profile.css";
-import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";
+import {
+  getAuth,
+  signOut,
+  onAuthStateChanged,
+  User,
+  updatePassword,
+} from "firebase/auth";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase";
 import "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 const auth = getAuth();
 
@@ -67,7 +74,21 @@ function Rightbar() {
   };
 
   //resetmatkhau
-
+  const handleChangePass = () => {
+    const newPassword = (document.getElementById("newpass") as HTMLInputElement).value;
+    const user = auth.currentUser;
+  
+    if (user && newPassword) {
+      updatePassword(user, newPassword)
+        .then(() => {
+          console.log("Thành công");
+        })
+        .catch((error) => {
+          console.log("Thất bại");
+        });
+    }
+  };
+  
   //endresetmatkhau
   return (
     <div className="app">
@@ -84,12 +105,13 @@ function Rightbar() {
           data-bs-toggle="modal"
           data-bs-target="#staticBackdrop"
         >
-<div className="imgslideright">
+          <div className="imgslideright">
             <img src={PadlockRef} alt="" className="imgprofileslideright" />
           </div>
           <p className="textprofileslideright">Đổi mật khẩu</p>
         </button>
 
+        {/* form đổi mật khẩu*/}
         <div
           className="modal fade"
           id="staticBackdrop"
@@ -112,7 +134,10 @@ function Rightbar() {
                   aria-label="Close"
                 />
               </div>
-              <div className="modal-body">...</div>
+              <div className="modal-body">
+                <input type="password" id="newpass"/>
+
+              </div>
               <div className="modal-footer">
                 <button
                   type="button"
@@ -121,14 +146,14 @@ function Rightbar() {
                 >
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={handleChangePass}>
                   Understood
                 </button>
               </div>
             </div>
           </div>
         </div>
-
+        {/* end form đổi mật khẩu*/}
         <button
           className="row profileslideright"
           onClick={handleSignOut}
