@@ -4,18 +4,44 @@ import "./topbar.css";
 import logo from "../logo.svg";
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { firestore } from "../firebase";
+import { DocumentData, doc, getDoc } from "firebase/firestore";
+
 
 const Topbar = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState<DocumentData | null>(null);
+
+    
   useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const userRef = doc(firestore, 'users', user.uid);
+          const docSnap = await getDoc(userRef);
+
+          if (docSnap.exists()) {
+            setUserInfo(docSnap.data());
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user information: ', error);
+      }
+    };
+
+    
+    //kết thúc lấy dữ liệu người dùng
+    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // Người dùng đã đăng nhập
         setUser(user);
         setIsLoggedIn(true);
+        fetchUserInfo();
 
       } else {
         // Người dùng đã đăng xuất
@@ -26,7 +52,9 @@ const Topbar = () => {
     return () => {
       unsubscribe(); // Hủy đăng ký lắng nghe khi component bị hủy
     };
+    
   }, [navigate]);
+
 
   return (
     <div className="topbar">
@@ -51,7 +79,7 @@ const Topbar = () => {
       {user ? (
         <a href="/profile" className="topbara">
           <div className="admin">
-            <img src="./logo192.png" alt="" className="adminimage" />
+            <img src={userInfo?.imageuser} alt="" className="adminimage" />
             <div className="texttopbar">
               <span
                 style={{
@@ -61,7 +89,7 @@ const Topbar = () => {
                   color: "white",
                 }}
               >
-                Ng.Tuyết
+               {userInfo?.lastname} {userInfo?.firstname} 
               </span>
               <p
                 style={{
@@ -71,7 +99,7 @@ const Topbar = () => {
                   color: "#B65100",
                 }}
               >
-                Admin
+                {userInfo?.role}
               </p>
             </div>
           </div>

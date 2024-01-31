@@ -5,20 +5,37 @@ import Sidebar from "../slidebar/Slidebar";
 import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";
 import Topbar from "../slidebar/topbar";
 import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../firebase";
+import { firestore, storage } from "../firebase";
+import "firebase/firestore";
+import { DocumentData, doc, getDoc } from "firebase/firestore";
+import firebase from "firebase/app";
 
 const auth = getAuth();
 
 function Profile() {
   const [cameraRef, setCameraUrl] = useState("");
+  const [fi_log_outRef, setfi_log_outUrl] = useState("");
+  const [PadlockRef, setPadlockUrl] = useState("");
+  const [fi_editRef, setfi_editUrl] = useState("");
 
   useEffect(() => {
     //Lấy ảnh
     const cameraRef = ref(storage, "icon/fi_camera.png");
+    const fi_log_outRef = ref(storage, "icon/fi_log-out.png");
+    const PadlockRef = ref(storage, "icon/Padlock.png");
+    const fi_editRef = ref(storage, "icon/fi_edit.png");
 
-    Promise.all([getDownloadURL(cameraRef)])
+    Promise.all([
+      getDownloadURL(cameraRef),
+      getDownloadURL(fi_log_outRef),
+      getDownloadURL(PadlockRef),
+      getDownloadURL(fi_editRef),
+    ])
       .then((urls) => {
         setCameraUrl(urls[0]);
+        setfi_log_outUrl(urls[1]);
+        setPadlockUrl(urls[2]);
+        setfi_editUrl(urls[3]);
       })
       .catch((error) => {
         console.log("Error getting URLs:", error);
@@ -29,11 +46,34 @@ function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
 
+  //lấy dữ liệu người dùng
+  const [userInfo, setUserInfo] = useState<DocumentData | null>(null);
+
   useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const userRef = doc(firestore, 'users', user.uid);
+          const docSnap = await getDoc(userRef);
+
+          if (docSnap.exists()) {
+            setUserInfo(docSnap.data());
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user information: ', error);
+      }
+    };
+
+    
+    //kết thúc lấy dữ liệu người dùng
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // Người dùng đã đăng nhập
         setUser(user);
+        fetchUserInfo();
       } else {
         // Người dùng đã đăng xuất
         navigate("/login"); // Chuyển hướng đến trang "Login"
@@ -56,21 +96,20 @@ function Profile() {
         console.log(error);
       });
   };
+
   return (
-    <div className="app">
-      <Topbar />
-      <div className="displayflex">
-        <div className="slidebar">
-          <Sidebar />
-        </div>
-        <div className="main">
+    <div className="main">
           <div className="row">
             <h1 className="tieude">Thông tin cơ bản</h1>
           </div>
+          
           <div className="row thongtinchitietprofile">
             <div className="col-6">
-              <img src="./logo192.png" alt="" className="profileimage" />
-              <img src={cameraRef} alt="" className="profileimage2" />
+              <img src={userInfo?.imageuser} alt="" className="profileimage" />
+              <div className="backgroupprofileimage2">
+                <img src={cameraRef} alt="" className="profileimage2" />
+              </div>
+
               <p
                 style={{
                   color: "#F5F5FF",
@@ -82,7 +121,7 @@ function Profile() {
                   lineHeight: "24px",
                 }}
               >
-                Tuyết Nguyễn
+                {userInfo?.lastname} {userInfo?.firstname}
               </p>
             </div>
             <div className="col-6">
@@ -95,6 +134,7 @@ function Profile() {
                     type="text"
                     className="form-control profile"
                     id="inputtext"
+                    value={userInfo?.firstname}disabled
                   />
                 </div>
                 <div className="col-md-6">
@@ -105,6 +145,7 @@ function Profile() {
                     type="text"
                     className="form-control profile"
                     id="inputten"
+                    value={userInfo?.lastname}disabled
                   />
                 </div>
                 <div className="col-6">
@@ -115,6 +156,7 @@ function Profile() {
                     type="date"
                     className="form-control profile"
                     id="inputdate"
+                    value={userInfo?.birthday}disabled
                   />
                 </div>
                 <div className="col-6">
@@ -125,6 +167,7 @@ function Profile() {
                     type="tel"
                     className="form-control profile"
                     id="inputAddress2"
+                    value={userInfo?.phonenumber}disabled
                   />
                 </div>
                 <div className="col-md-12">
@@ -135,6 +178,7 @@ function Profile() {
                     type="email"
                     className="form-control profile disabledprofile"
                     disabled
+                    value={userInfo?.email}
                   />
                 </div>
                 <div className="col-md-12">
@@ -145,30 +189,25 @@ function Profile() {
                     type="text"
                     className="form-control profile disabledprofile"
                     disabled
+                    value={userInfo?.email}
                   />
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="inputZip" className="form-label">
-                    Vai trò
+                    Phân quyền
                   </label>
                   <input
                     type="text"
                     className="form-control profile disabledprofile"
                     id="inputZip"
                     disabled
+                    value={userInfo?.role}
                   />
-                </div>
-                <div className="col-12">
-                  <button type="submit" className="btn btn-primary">
-                    Sign in
-                  </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
 

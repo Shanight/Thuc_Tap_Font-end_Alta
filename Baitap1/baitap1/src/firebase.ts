@@ -5,6 +5,9 @@ import { getDatabase } from "firebase/database";
 import { getAuth,GoogleAuthProvider,sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { Auth } from "firebase/auth";
+import "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,6 +30,9 @@ export const firebase = getDatabase(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const googleProvider = new GoogleAuthProvider();
+export const firestore = getFirestore(app);
+
+
 
 export const passwordReset = async (email: string) => {
   return await sendPasswordResetEmail(auth, email)

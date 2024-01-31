@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import "./Slidebar.css";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
-
 const Sidebar = () => {
   //Lấy ảnh từ firebase
   const [logoUrl, setLogoUrl] = useState("");

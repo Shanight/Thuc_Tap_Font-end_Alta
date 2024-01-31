@@ -12,7 +12,7 @@ import Login from "./Login/login";
 import Playlist from "./playlist/Playlist";
 import Calendar from "./calendar/calendar";
 import Resetpass from './Login/resetpasssword';
-import Profile from "./profile/profile";
+import Mainprofile from "./profile/main";
 import DanhSachHopDong from "./QuanLy/DanhSachHopDong";
 import QuanLyThietBi from "./QuanLy/QuanLyThietBi";
 import QuanLyUyQuyen from "./QuanLy/QuanLyUyQuyen";
@@ -28,6 +28,7 @@ import ChuKyDoiSoat from "./CaiDat/ChuKyDoiSoat";
 import HuongDanSuDung from "./HoTro/HuongDanSuDung";
 import TaiApp from "./HoTro/TaiApp";
 import Feedback from "./HoTro/Feedback";
+import Register from "./Login/register";
 
 function App() {
   useEffect(() => {
@@ -53,7 +54,9 @@ function App() {
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/login/resetpass" element={<Resetpass />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route path="/profile" element={<Mainprofile />} />
         <Route path="/quanlyhopdong" element={<DanhSachHopDong />} />
         <Route path="/quanlysudung" element={<QuanlySuDung />} />
         <Route path="/quanlythietbi" element={<QuanLyThietBi />} />
