@@ -13,6 +13,8 @@ import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase";
 import "firebase/firestore";
 import { doc, updateDoc } from "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const auth = getAuth();
 
@@ -75,9 +77,10 @@ function Rightbar() {
 
   //resetmatkhau
   const handleChangePass = () => {
-    const newPassword = (document.getElementById("newpass") as HTMLInputElement).value;
+    const newPassword = (document.getElementById("newpass") as HTMLInputElement)
+      .value;
     const user = auth.currentUser;
-  
+
     if (user && newPassword) {
       updatePassword(user, newPassword)
         .then(() => {
@@ -88,8 +91,24 @@ function Rightbar() {
         });
     }
   };
-  
+
   //endresetmatkhau
+  //hiện password đã nhập
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleTogglePassword1 = () => {
+    setShowPassword1(!showPassword1);
+  };
+  const handleTogglePassword2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+  //end hiện password
   return (
     <div className="app">
       <div className="slideright">
@@ -122,33 +141,115 @@ function Rightbar() {
           aria-hidden="true"
         >
           <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                  Modal title
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-              <div className="modal-body">
-                <input type="password" id="newpass"/>
-
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
+            <div className="bgclslideright">
+              <div
+                className="modal-content"
+                style={{
+                  backgroundColor: "rgb(62, 62, 91)",
+                  borderRadius: "16px",
+                  width: "500px",
+                  height: "402px",
+                  top: "40px",
+                }}
+              >
+                <div style={{ textAlign: "center", marginTop: "15px" }}>
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                    Thay đổi mật khẩu
+                  </h1>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                  }}
                 >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary" onClick={handleChangePass}>
-                  Understood
-                </button>
+                  <div className="coltrolrepass">
+                    <div style={{ textAlign: "left" }}>
+                      <label htmlFor="oldpass" className="form-label">
+                        Mật khẩu hiện tại:
+                      </label>
+                      <div className={`input-group`}>
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          className={`form-control`}
+                          id="oldpass"
+                        />
+                        <button
+                          className="eye"
+                          type="button"
+                          onClick={handleTogglePassword}
+                        >
+                          <FontAwesomeIcon
+                            icon={showPassword ? faEyeSlash : faEye}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: "left" }}>
+                      <label htmlFor="oldpass" className="form-label">
+                        Mật khẩu mới:
+                      </label>
+                      <div className={`input-group`}>
+                        <input
+                          type={showPassword1 ? "text" : "password"}
+                          className={`form-control`}
+                          id="newpass"
+                        />
+                        <button
+                          className="eye"
+                          type="button"
+                          onClick={handleTogglePassword1}
+                        >
+                          <FontAwesomeIcon
+                            icon={showPassword1 ? faEyeSlash : faEye}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: "left" }}>
+                      <label htmlFor="oldpass" className="form-label">
+                        Nhập lại mật khẩu mới:
+                      </label>
+                      <div className={`input-group`}>
+                        <input
+                          type={showPassword2 ? "text" : "password"}
+                          className={`form-control`}
+                          id="renewpass"
+                        />
+                        <button
+                          className="eye"
+                          type="button"
+                          onClick={handleTogglePassword2}
+                        >
+                          <FontAwesomeIcon
+                            icon={showPassword2 ? faEyeSlash : faEye}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="" style={{marginBottom:"30px"}}>
+                  <button
+                    type="button"
+                    className="btn"
+                    data-bs-dismiss="modal"
+                    style={{ color:"#FF7506", border:"1px solid #FF7506", width:"138px"}}
+                  >
+                    Hủy
+                  </button>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={handleChangePass}
+                    style={{backgroundColor:"#FF7506", color:"white", width:"138px", marginLeft:"10px"}}
+                  >
+                    Lưu
+                  </button>
+                </div>
               </div>
             </div>
           </div>

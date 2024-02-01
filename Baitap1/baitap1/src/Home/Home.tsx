@@ -67,7 +67,7 @@ function Home() {
               </button>
             </form>
           </div>
-          <div className="row test1">
+          <div className="row test1" style={{width:"131%", marginBottom:"10px"}}>
             <div className="col-2 theloai">
               Thể loại:
               <div className="dropdown-center dropdownhome">
@@ -130,7 +130,7 @@ function Home() {
                 </ul>
               </div>
             </div>
-            <div className="col-2 theloai">
+            <div className="col-3 theloai">
               Thời hạn sử dụng:
               <div className="dropdown-center dropdownhome">
                 <button
@@ -202,9 +202,9 @@ function Home() {
               <FontAwesomeIcon icon={faBorderAll} className="iconhomeicon" />
             </div>
           </div>
-          <div className="row sanpham">
+          <div className="row sanpham" style={{width:"120%"}}>
             <div className="sanphamchitiet">
-              <tr style={{fontSize:"13px", lineHeight:"20px", fontWeight:"700", color:"#FFAC69", width:"100%"}}>
+              <tr style={{fontSize:"13px", lineHeight:"30px", fontWeight:"700", color:"#FFAC69", width:"100%"}}>
                 <td width={"5%"}>STT</td>
                 <td width={"13%"}>Tên bản ghi</td>
                 <td width={"11%"}>Mã ISRC</td>
@@ -219,6 +219,20 @@ function Home() {
               </tr>
               <tr style={{fontFamily:"Montserrat",fontSize:"13px",lineHeight:"20px", width:"100%"}}>
                 <td width={"5%"}>1</td>
+                <td width={"13%"}>Mất em</td>
+                <td width={"11%"}>KRA40105463</td>
+                <td width={"8%"}>04:27</td>
+                <td width={"11%"}>Phan Mạnh Quỳnh</td>
+                <td width={"13%"}>Phan Mạnh Quỳnh</td>
+                <td width={"8%"}>Ballad</td>
+                <td width={"9%"}>Audio</td>
+                <td width={"12%"}><span>Còn thời hạn</span> <p>02/10/2019</p></td>
+                <td width={"8%"}><a href="/capnhat">Cập nhật</a></td>
+                <td width={"9%"}><a href="/nghe">Nghe</a></td>
+              </tr>
+
+              <tr style={{fontFamily:"Montserrat",fontSize:"13px",lineHeight:"20px", width:"100%"}}>
+                <td width={"5%"}>2</td>
                 <td width={"13%"}>Mất em</td>
                 <td width={"11%"}>KRA40105463</td>
                 <td width={"8%"}>04:27</td>
