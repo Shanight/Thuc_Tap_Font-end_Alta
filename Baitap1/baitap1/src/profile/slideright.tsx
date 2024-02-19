@@ -79,17 +79,29 @@ function Rightbar() {
   const handleChangePass = () => {
     const newPassword = (document.getElementById("newpass") as HTMLInputElement)
       .value;
-    const user = auth.currentUser;
 
-    if (user && newPassword) {
-      updatePassword(user, newPassword)
-        .then(() => {
-          console.log("Thành công");
-        })
-        .catch((error) => {
-          console.log("Thất bại");
-        });
+      const oldpassword = (document.getElementById("oldpass") as HTMLInputElement)
+      .value;
+      const renewpass = (document.getElementById("renewpass") as HTMLInputElement)
+      .value;
+
+    const user = auth.currentUser;
+    if( newPassword == renewpass){
+      if (user && renewpass) {
+
+        updatePassword(user, renewpass)
+          .then(() => {
+            console.log("Thành công");
+            alert("Thành công");
+          })
+          .catch((error) => {
+            console.log("Thất bại");
+          });
+      }
+    }else{
+      alert("Mật khẩu mới không trùng khớp");
     }
+    
   };
 
   //endresetmatkhau
@@ -209,7 +221,7 @@ function Rightbar() {
                       </div>
                     </div>
                     <div style={{ textAlign: "left" }}>
-                      <label htmlFor="oldpass" className="form-label">
+                      <label htmlFor="renewpass" className="form-label">
                         Nhập lại mật khẩu mới:
                       </label>
                       <div className={`input-group`}>
@@ -232,12 +244,16 @@ function Rightbar() {
                   </div>
                 </div>
 
-                <div className="" style={{marginBottom:"30px"}}>
+                <div className="" style={{ marginBottom: "30px" }}>
                   <button
                     type="button"
                     className="btn"
                     data-bs-dismiss="modal"
-                    style={{ color:"#FF7506", border:"1px solid #FF7506", width:"138px"}}
+                    style={{
+                      color: "#FF7506",
+                      border: "1px solid #FF7506",
+                      width: "138px",
+                    }}
                   >
                     Hủy
                   </button>
@@ -245,7 +261,12 @@ function Rightbar() {
                     type="button"
                     className="btn"
                     onClick={handleChangePass}
-                    style={{backgroundColor:"#FF7506", color:"white", width:"138px", marginLeft:"10px"}}
+                    style={{
+                      backgroundColor: "#FF7506",
+                      color: "white",
+                      width: "138px",
+                      marginLeft: "10px",
+                    }}
                   >
                     Lưu
                   </button>
