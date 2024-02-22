@@ -10,7 +10,6 @@ import {
   faList,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import Rightbarhome from "../Home/rightbarhome";
 import { getDownloadURL, ref } from "firebase/storage";
 import { firestore, storage } from "../firebase";
 import {
@@ -20,7 +19,7 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-
+import RightbarDSHD from "./rightbarDSHD";
 const auth = getAuth();
 
 function DanhSachHopDong() {
@@ -125,7 +124,7 @@ function DanhSachHopDong() {
             style={{ width: "110%", marginBottom: "10px" }}
           >
             <div className="col-2 theloai">
-              Thể loại:
+              Quyền sở hữu:
               <div className="dropdown-center dropdownhome">
                 <button
                   className="btn dropdown-toggle dropdownbutton"
@@ -156,7 +155,7 @@ function DanhSachHopDong() {
               </div>
             </div>
             <div className="col-2 theloai">
-              Định dạng:
+              Hiệu lực hợp đồng:
               <div className="dropdown-center dropdownhome">
                 <button
                   className="btn dropdown-toggle dropdownbutton"
@@ -186,76 +185,23 @@ function DanhSachHopDong() {
                 </ul>
               </div>
             </div>
-            <div className="col-3 theloai">
-              Thời hạn sử dụng:
-              <div className="dropdown-center dropdownhome">
-                <button
-                  className="btn dropdown-toggle dropdownbutton"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ width: "100%" }}
-                >
-                  Tất cả
-                </button>
-                <ul className="dropdown-menu" style={{ width: "100%" }}>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Tất cả
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Pop
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      EDM
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Ballad
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-2 theloai">
-              Trạng thái:
-              <div className="dropdown-center dropdownhome">
-                <button
-                  className="btn dropdown-toggle dropdownbutton"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ width: "100%" }}
-                >
-                  Tất cả
-                </button>
-                <ul className="dropdown-menu" style={{ width: "100%" }}>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Tất cả
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Âm thanh
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Video
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-2 theloai iconhome">
-              <FontAwesomeIcon icon={faList} className="iconhomeicon" />
-              <FontAwesomeIcon icon={faBorderAll} className="iconhomeicon" />
+            <div className="col-4"></div>
+            <div className="col-2">
+            <form className="d-flex mt-3 search" role="search">
+              <input
+                className="form-control me-2 labelsearch bg-transparent focus:bg-transparent border-none hover:bg-transparent placeholder:text-[#727288] focus:ring-0 h-full text-base font-normal font-['Montserrat'] leading-normal"
+                type="search"
+                placeholder="Tên bản ghi, ca sĩ,..."
+                aria-label="Search"
+              />
+              <button
+                className="searchicon"
+                type="button"
+                style={{ background: "none", border: "none", color: "white" }}
+              >
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>
+            </form>
             </div>
           </div>
           <div className="row sanpham" style={{ width: "1441px" }}>
@@ -442,7 +388,7 @@ function DanhSachHopDong() {
           <button onClick={handleSignOut}>Đăng xuất</button>
         </div>
         <div className="slideright">
-          <Rightbarhome />
+          <RightbarDSHD />
         </div>
       </div>
     </div>
