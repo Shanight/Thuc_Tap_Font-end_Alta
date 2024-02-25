@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { firestore } from "../firebase";
 import { DocumentData, doc, getDoc } from "firebase/firestore";
 
-
 const Topbar = () => {
   const navigate = useNavigate();
   const auth = getAuth();
@@ -15,13 +14,13 @@ const Topbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState<DocumentData | null>(null);
 
-    
   useEffect(() => {
+    //Lấy dữ liệu người dùng,nếu đăng nhập thì sẽ lấy dữ liệu, không thì thôi
     const fetchUserInfo = async () => {
       try {
         const user = auth.currentUser;
         if (user) {
-          const userRef = doc(firestore, 'users', user.uid);
+          const userRef = doc(firestore, "users", user.uid);
           const docSnap = await getDoc(userRef);
 
           if (docSnap.exists()) {
@@ -29,20 +28,18 @@ const Topbar = () => {
           }
         }
       } catch (error) {
-        console.error('Error fetching user information: ', error);
+        console.error("Error fetching user information: ", error);
       }
     };
 
-    
     //kết thúc lấy dữ liệu người dùng
-    
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // Người dùng đã đăng nhập
         setUser(user);
         setIsLoggedIn(true);
         fetchUserInfo();
-
       } else {
         // Người dùng đã đăng xuất
         setIsLoggedIn(false);
@@ -52,9 +49,7 @@ const Topbar = () => {
     return () => {
       unsubscribe(); // Hủy đăng ký lắng nghe khi component bị hủy
     };
-    
   }, [navigate]);
-
 
   return (
     <div className="topbar">
@@ -89,7 +84,7 @@ const Topbar = () => {
                   color: "white",
                 }}
               >
-               {userInfo?.lastname} {userInfo?.firstname} 
+                {userInfo?.lastname} {userInfo?.firstname}
               </span>
               <p
                 style={{

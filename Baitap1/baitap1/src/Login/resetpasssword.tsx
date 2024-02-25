@@ -6,6 +6,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import "./resetpass.css";
 
 const Resetpass = () => {
+  //gửi mail đổi pass
   const handleResetPassword = () => {
     const email = (document.getElementById("emaildn") as HTMLInputElement)
       .value;

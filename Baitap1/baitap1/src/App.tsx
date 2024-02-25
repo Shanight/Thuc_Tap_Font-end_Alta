@@ -29,6 +29,8 @@ import HuongDanSuDung from "./HoTro/HuongDanSuDung";
 import TaiApp from "./HoTro/TaiApp";
 import Feedback from "./HoTro/Feedback";
 import Register from "./Login/register";
+import Chitiethopdonguyquyen from "./QuanLy/chitiethopdonguyquyen";
+import Themhopdonguyquyen from "./QuanLy/chitiethopdonguyquyen/create";
 
 function App() {
   useEffect(() => {
@@ -64,6 +66,8 @@ function App() {
         <Route path="/baocaodoanhthu" element={<BaoCaoDoanhThu />} />
         <Route path="/lichsudoisoat" element={<LichSuDoiSoat />} />
         <Route path="/phanphoidoanhthu" element={<PhanPhoiDoanhThu />} />
+        <Route path="/quanlyhopdong/chitiet/:id" element={<Chitiethopdonguyquyen />} />
+        <Route path="/quanlyhopdong/create" element={<Themhopdonguyquyen />} />
 
         <Route path="/phanquyennguoidung" element={<PhanQuyenNguoiDung />} />
         <Route path="/cauhinh" element={<CauHinh />} />
@@ -81,6 +85,8 @@ function App() {
         />
       </Routes>
     </Router>
+
+    
   );
 }
 

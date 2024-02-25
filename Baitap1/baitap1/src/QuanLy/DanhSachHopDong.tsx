@@ -20,6 +20,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import RightbarDSHD from "./rightbarDSHD";
+import { Link } from "react-router-dom";
+
 const auth = getAuth();
 
 function DanhSachHopDong() {
@@ -238,14 +240,14 @@ function DanhSachHopDong() {
                       }}
                     >
                       <td width={"7%"}>{index + 1}</td>
-                      <td width={"13%"}>{item.SoHopDong}</td>
-                      <td width={"25%"}>{item.TenHopDong}</td>
-                      <td width={"13%"}>{item.NguoiUyQuyen}</td>
-                      <td width={"13%"}>{item.QuyenSoHuu}</td>
-                      <td width={"12%"}>{item.HieuLucHopDong}</td>
-                      <td width={"8%"}>{item.NgayTao}</td>
+                      <td width={"13%"}>{item.sohopdong}</td>
+                      <td width={"25%"}>{item.tenhopdong}</td>
+                      <td width={"13%"}>{item.tennguoiuyquyen}</td>
+                      <td width={"13%"}>{item.quyensohuu}</td>
+                      <td width={"12%"}>{item.ngayhethan}</td>
+                      <td width={"8%"}>{item.ngayhieuluc}</td>
                       <td width={"8%"} >
-                        <a href="/" style={{ color: "#FF7506" }}>Xem chi tiết</a>
+                        <Link to={`/quanlyhopdong/chitiet/${item.id}`} style={{ color: "#FF7506" }}>Xem chi tiết</Link>
                       </td>
                       <td width={"9%"}>
                         <a href="/" style={{ color: "#FF7506" }}>Nghe</a>
