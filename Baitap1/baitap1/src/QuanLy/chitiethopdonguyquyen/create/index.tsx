@@ -22,22 +22,125 @@ function Themhopdonguyquyen() {
   const [user, setUser] = useState<User | null>(null);
   const { id } = useParams<{ id: string }>();
 
+  const [selectedquoctichValue, setSelectedValue] = useState("");
+
+  const handleSelectquoctichChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setSelectedValue(event.target.value);
+  };
+
   const handleSubmit = async () => {
     let gioitinh = "";
     let phapnhanuyquyen = "";
-    // Lấy giá trị từ các ô input
-    const gioitinh1 = document.getElementById("gioitinh1") as HTMLInputElement;
-    if (gioitinh1.checked) {
-      gioitinh = "Nam";
+    let quoctich = selectedquoctichValue;
+    if (quoctich == "") {
+      quoctich = "Việt Nam";
     } else {
-      gioitinh = "Nữ";
+      quoctich = selectedquoctichValue;
     }
+    // Lấy giá trị từ các ô input
 
     const canhan = document.getElementById("canhan") as HTMLInputElement;
     if (canhan.checked) {
-      phapnhanuyquyen = "Cá nhân";
+      phapnhanuyquyen = canhan.value;
     } else {
-      phapnhanuyquyen = "Tổ chức";
+      const tochuc = document.getElementById("tochuc") as HTMLInputElement;
+      if (tochuc.checked) {
+        phapnhanuyquyen = tochuc.value;
+      } else {
+        phapnhanuyquyen = "Tổ chức";
+      }
+    }
+
+    const gioitinh1 = document.getElementById("gioitinh1") as HTMLInputElement;
+    if (gioitinh1.checked) {
+      gioitinh = gioitinh1.value;
+    } else {
+      const gioitinh2 = document.getElementById(
+        "gioitinh2"
+      ) as HTMLInputElement;
+      if (gioitinh2.checked) {
+        gioitinh = gioitinh2.value;
+      } else {
+        gioitinh = "Nữ";
+      }
+    }
+
+    const ngayhieulucElement = document.getElementById(
+      "ngayhieuluctext"
+    ) as HTMLInputElement;
+    let ngayhieuluc = "";
+    if (ngayhieulucElement !== null) {
+      const ngayhieuluc1 = ngayhieulucElement.value;
+
+      // Chuyển đổi thành đối tượng ngày
+      const date = new Date(ngayhieuluc1);
+
+      // Lấy giá trị ngày, tháng, năm
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear().toString();
+
+      // Định dạng lại chuỗi ngày/tháng/năm
+      ngayhieuluc = `${day}/${month}/${year}`;
+    }
+
+    const ngayhethanElement = document.getElementById(
+      "ngayhethantext"
+    ) as HTMLInputElement;
+    let ngayhethan = "";
+    if (ngayhethanElement !== null) {
+      const ngayhethan1 = ngayhethanElement.value;
+
+      // Chuyển đổi thành đối tượng ngày
+      const date = new Date(ngayhethan1);
+
+      // Lấy giá trị ngày, tháng, năm
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear().toString();
+
+      // Định dạng lại chuỗi ngày/tháng/năm
+      ngayhethan = `${day}/${month}/${year}`;
+    }
+
+    const ngaysinhElement = document.getElementById(
+      "ngaysinhtext"
+    ) as HTMLInputElement;
+    let ngaysinh = "";
+    if (ngaysinhElement !== null) {
+      const ngaysinh1 = ngaysinhElement.value;
+
+      // Chuyển đổi thành đối tượng ngày
+      const date = new Date(ngaysinh1);
+
+      // Lấy giá trị ngày, tháng, năm
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear().toString();
+
+      // Định dạng lại chuỗi ngày/tháng/năm
+      ngaysinh = `${day}/${month}/${year}`;
+    }
+
+    const ngaycapElement = document.getElementById(
+      "ngaycaptext"
+    ) as HTMLInputElement;
+    let ngaycap = "";
+    if (ngaycapElement !== null) {
+      const ngaycap1 = ngaycapElement.value;
+
+      // Chuyển đổi thành đối tượng ngày
+      const date = new Date(ngaycap1);
+
+      // Lấy giá trị ngày, tháng, năm
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear().toString();
+
+      // Định dạng lại chuỗi ngày/tháng/năm
+      ngaycap = `${day}/${month}/${year}`;
     }
 
     const soHopDong = (
@@ -46,12 +149,7 @@ function Themhopdonguyquyen() {
     const tenHopDong = (
       document.getElementById("tenhopdongtext") as HTMLInputElement
     ).value;
-    const ngayhieuluc = (
-      document.getElementById("ngayhieuluctext") as HTMLInputElement
-    ).value;
-    const ngayhethan = (
-      document.getElementById("ngayhethantext") as HTMLInputElement
-    ).value;
+
     const tentochuc = (
       document.getElementById("tentochuctext") as HTMLInputElement
     ).value;
@@ -71,18 +169,11 @@ function Themhopdonguyquyen() {
     ).value;
     const chucvu = (document.getElementById("chucvutext") as HTMLInputElement)
       .value;
-    const ngaysinh = (
-      document.getElementById("ngaysinhtext") as HTMLInputElement
-    ).value;
     const CCCD = (document.getElementById("CCCDtext") as HTMLInputElement)
-      .value;
-    const ngaycap = (document.getElementById("ngaycaptext") as HTMLInputElement)
       .value;
     const noicap = (document.getElementById("noicaptext") as HTMLInputElement)
       .value;
-    const quoctich = (
-      document.getElementById("quoctichtext") as HTMLInputElement
-    ).value;
+
     const noicutru = (
       document.getElementById("noicutrutext") as HTMLInputElement
     ).value;
@@ -97,6 +188,7 @@ function Themhopdonguyquyen() {
 
     try {
       // Thêm dữ liệu vào Firestore
+
       const tempDocRef = await addDoc(
         collection(firestore, "quanlyhopdong"),
         {}
@@ -113,11 +205,11 @@ function Themhopdonguyquyen() {
         sotaikhoan: sotaikhoan,
         nganhang: nganhang,
         diachi: diachi,
-        nguoidaidien: nguoidaidien,
+        tennguoiuyquyen: nguoidaidien,
         chucvu: chucvu,
         ngaysinh: ngaysinh,
         gioitinh: gioitinh,
-        CCCD: CCCD,
+        socccd: CCCD,
         ngaycap: ngaycap,
         noicap: noicap,
         quoctich: quoctich,
@@ -126,9 +218,14 @@ function Themhopdonguyquyen() {
         email: email,
         tendangnhap: email,
         matkhau: matkhau,
+        quyentacgia: 0,
+        quyennguoibieudien: 50,
+        quyennhasanxuat: 50,
         // Thêm các trường khác vào đây
       });
       console.log("Dữ liệu đã được thêm vào Firestore với ID: ", tempDocRef.id);
+
+      alert("Đã thêm thành công");
     } catch (error) {
       console.error("Lỗi khi thêm dữ liệu vào Firestore: ", error);
     }
@@ -403,9 +500,11 @@ function Themhopdonguyquyen() {
                       name="quoctich"
                       id="quoctich"
                       className="inputtextcreatehopdonguyquyen"
+                      value={selectedquoctichValue}
+                      onChange={handleSelectquoctichChange}
                     >
                       <option value="Việt Nam">Việt Nam</option>
-                      <option value="Hàn Quốc"> Hàn Quốc</option>
+                      <option value="Hàn Quốc">Hàn Quốc</option>
                     </select>
                   </p>
                 </div>
@@ -462,9 +561,39 @@ function Themhopdonguyquyen() {
               </div>
             </div>
           </div>
-          <div className="row" style={{ textAlign: "center" }}>
-            <button>Hủy</button>
-            <button onClick={handleSubmit}>Tạo</button>
+          <div className="row">
+            <div
+              className="col"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "40px",
+              }}
+            >
+              <a href="http://localhost:3000/quanlyhopdong/" style={{
+                paddingRight:"40px"
+              }}>
+                <button
+                  style={{
+                    background: "none",
+                    border: "1px solid #FF7506",
+                    color: "#FF7506",
+                    width: "168px",
+                    height: "48px",
+                    borderRadius: "8px",
+                  }}
+                >
+                  {" "}
+                  Hủy
+                </button>
+              </a>
+              <button
+                onClick={handleSubmit}
+                style={{ backgroundColor: "#FF7506",color:"white", width:"168px",height:"48px", borderRadius:"8px" }}
+              >
+                Lưu
+              </button>
+            </div>
           </div>
         </div>
         <div className="slideright">
