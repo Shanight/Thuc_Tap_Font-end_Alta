@@ -106,9 +106,22 @@ function Chitiethopdonguyquyen() {
       }
     });
 
+//hieuung
+const tabBodies = document.querySelectorAll('.tab-slider--body');
+    tabBodies.forEach((body, index) => {
+      if (index === 0) {
+        (body as HTMLElement).style.display = 'block';
+      } else {
+        (body as HTMLElement).style.display = 'none';
+      }
+    });
+//end
+
     return () => {
       unsubscribe(); // Hủy đăng ký lắng nghe khi component bị hủy
     };
+
+    
   }, [navigate]);
 
   const handleSignOut = () => {
@@ -122,6 +135,20 @@ function Chitiethopdonguyquyen() {
         console.log(error);
       });
   };
+  //hieuung
+  const [activeTab, setActiveTab] = useState('tab1');
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+    const tabBodies = document.querySelectorAll('.tab-slider--body');
+    tabBodies.forEach((body) => {
+      if (body.id === tabId) {
+        (body as HTMLElement).style.display = 'block';
+      } else {
+        (body as HTMLElement).style.display = 'none';
+      }
+    });
+  };
+  //end
 
   return (
     <div className="app">
@@ -132,8 +159,80 @@ function Chitiethopdonguyquyen() {
         </div>
         <div className="main" style={{ width: "82%" }}>
           <div className="row">
+            <p style={{ color: "#FFAC69" }}>
+              <a
+                href="http://localhost:3000/quanlyhopdong"
+                style={{ color: "#F5F5FF", textDecoration: "none" }}
+              >
+                Quản lý{" "}
+              </a>
+              {">"}{" "}
+              <a
+                href="http://localhost:3000/quanlyhopdong"
+                style={{ color: "#F5F5FF", textDecoration: "none" }}
+              >
+                Quản lý hợp đồng
+              </a>{" "}
+              {">"} <span style={{ color: "#F5F5FF" }}>Chi tiết</span>
+            </p>
+          </div>
+          <div className="row">
             <h1>Chi tiết hợp đồng ủy quyền</h1>
           </div>
+          <div className="row">
+            <div>
+              <div className="tab-slider--nav">
+                <ul className="tab-slider--tabs">
+                  <li
+                    className={`tab-slider--trigger ${
+                      activeTab === "tab1" ? "active" : ""
+                    }`}
+                    onClick={() => handleTabClick("tab1")}
+                    rel="tab1"
+                  >
+                    Tab 1
+                  </li>
+                  <li
+                    className={`tab-slider--trigger ${
+                      activeTab === "tab2" ? "active" : ""
+                    }`}
+                    onClick={() => handleTabClick("tab2")}
+                    rel="tab2"
+                  >
+                    Tab 2
+                  </li>
+                </ul>
+              </div>
+              <div className="tab-slider--container">
+                <div id="tab1" className="tab-slider--body">
+                  <h2>First Tab</h2>
+                  <p>
+                    Toggle switch style tab navigation. Currently only works
+                    with two tabs.
+                  </p>
+                  <p>
+                    Donec ullamcorper nulla non metus auctor fringilla. Donec
+                    ullamcorper nulla non metus auctor fringilla. Aenean eu leo
+                    quam. Pellentesque ornare sem lacinia quam venenatis
+                    vestibulum. Nullam id dolor id nibh ultricies vehicula ut id
+                    elit. Nulla vitae elit libero, a pharetra augue.
+                  </p>
+                </div>
+                <div id="tab2" className="tab-slider--body">
+                  <h2>Second Tab</h2>
+                  <p>
+                    Cum sociis natoque penatibus et magnis dis parturient
+                    montes, nascetur ridiculus mus. Cras mattis consectetur
+                    purus sit amet fermentum. Nulla vitae elit libero, a
+                    pharetra augue. Cras mattis consectetur purus sit amet
+                    fermentum. Aenean eu leo quam. Pellentesque ornare sem
+                    lacinia quam venenatis vestibulum.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="row" style={{}}>
             <div className="col-4">
               <div className="row">
@@ -178,10 +277,12 @@ function Chitiethopdonguyquyen() {
                 <div className="col">
                   <p></p>
                   <p>
-                    <br/>
+                    <br />
                     {quyentacgia}%
                   </p>
-                  <p><br/></p>
+                  <p>
+                    <br />
+                  </p>
                   <p>{quyennguoibieudien}%</p>
                   <p>{quyennhasanxuat}%</p>
                 </div>
