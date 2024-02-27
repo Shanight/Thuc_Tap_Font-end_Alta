@@ -19,7 +19,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import Rightbar from "./rightbar";
-
+import "./style.css";
 const auth = getAuth();
 
 function Chitiethopdonguyquyen() {
@@ -106,22 +106,20 @@ function Chitiethopdonguyquyen() {
       }
     });
 
-//hieuung
-const tabBodies = document.querySelectorAll('.tab-slider--body');
+    //hieuung
+    const tabBodies = document.querySelectorAll(".tab-slider--body");
     tabBodies.forEach((body, index) => {
       if (index === 0) {
-        (body as HTMLElement).style.display = 'block';
+        (body as HTMLElement).style.display = "block";
       } else {
-        (body as HTMLElement).style.display = 'none';
+        (body as HTMLElement).style.display = "none";
       }
     });
-//end
+    //end
 
     return () => {
       unsubscribe(); // Hủy đăng ký lắng nghe khi component bị hủy
     };
-
-    
   }, [navigate]);
 
   const handleSignOut = () => {
@@ -136,15 +134,15 @@ const tabBodies = document.querySelectorAll('.tab-slider--body');
       });
   };
   //hieuung
-  const [activeTab, setActiveTab] = useState('tab1');
+  const [activeTab, setActiveTab] = useState("tab1");
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId);
-    const tabBodies = document.querySelectorAll('.tab-slider--body');
+    const tabBodies = document.querySelectorAll(".tab-slider--body");
     tabBodies.forEach((body) => {
       if (body.id === tabId) {
-        (body as HTMLElement).style.display = 'block';
+        (body as HTMLElement).style.display = "block";
       } else {
-        (body as HTMLElement).style.display = 'none';
+        (body as HTMLElement).style.display = "none";
       }
     });
   };
@@ -190,7 +188,7 @@ const tabBodies = document.querySelectorAll('.tab-slider--body');
                     onClick={() => handleTabClick("tab1")}
                     rel="tab1"
                   >
-                    Tab 1
+                    Thông tin hợp đồng
                   </li>
                   <li
                     className={`tab-slider--trigger ${
@@ -199,166 +197,143 @@ const tabBodies = document.querySelectorAll('.tab-slider--body');
                     onClick={() => handleTabClick("tab2")}
                     rel="tab2"
                   >
-                    Tab 2
+                    Tác phẩm ủy quyền
                   </li>
                 </ul>
               </div>
               <div className="tab-slider--container">
                 <div id="tab1" className="tab-slider--body">
-                  <h2>First Tab</h2>
-                  <p>
-                    Toggle switch style tab navigation. Currently only works
-                    with two tabs.
-                  </p>
-                  <p>
-                    Donec ullamcorper nulla non metus auctor fringilla. Donec
-                    ullamcorper nulla non metus auctor fringilla. Aenean eu leo
-                    quam. Pellentesque ornare sem lacinia quam venenatis
-                    vestibulum. Nullam id dolor id nibh ultricies vehicula ut id
-                    elit. Nulla vitae elit libero, a pharetra augue.
-                  </p>
+                  <div className="row" style={{}}>
+                    <div className="col-4">
+                      <div className="row">
+                        <div className="col-3 chudau1">
+                          <p>Số hợp đồng:</p>
+                          <p>Tên hợp đồng:</p>
+                          <p>Ngày hiệu lực:</p>
+                          <p>Ngày hết hạn:</p>
+                          <p>Tình trạng:</p>
+                        </div>
+                        <div className="col chucuoi1">
+                          <p>{sohopdong}</p>
+                          <p>{tenhopdong}</p>
+                          <p>{ngayhieuluc}</p>
+                          <p>{ngayhethan}</p>
+                          <p>Còn thời hạn</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-4">
+                      <div className="row">
+                        <div className="col-3 chudau1">
+                          <p>Đính kèm tệp</p>
+                        </div>
+                        <div className="col chucuoi1">
+                          <p>Hetthuongmetnho.mp3</p>
+                          <p>test2.doc</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-4">
+                      <div className="row">
+                        <div className="col-6 chudau1">
+                          <p>Mức nhuận bút</p>
+                          <p>Quyền tác giả:</p>
+                          <p>Quyền liên quan:</p>
+                          <p>Quyền của người biểu diễn:</p>
+                          <p>Quyền của nhà sản xuất {"(Bản ghi/video)"}</p>
+                        </div>
+                        <div className="col chucuoi1">
+                          <p></p>
+                          <p>
+                            <br />
+                            {quyentacgia}%
+                          </p>
+                          <p>
+                            <br />
+                          </p>
+                          <p>{quyennguoibieudien}%</p>
+                          <p>{quyennhasanxuat}%</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row" style={{ marginTop: "30px" }}>
+                    <p>Thông tin pháp nhân ủy quyền</p>
+                    <div className="col-4">
+                      <div className="row">
+                        <div className="col-4 chudau1">
+                          <p>Pháp nhân ủy quyền:</p>
+                          <p>Tên người ủy quyền:</p>
+                          <p>Ngày sinh:</p>
+                          <p>Giới tính:</p>
+                          <p>Quốc tịch:</p>
+                          <p>Số điện thoại:</p>
+                        </div>
+                        <div className="col chucuoi1">
+                          <p>{phapnhanuyquyen}</p>
+                          <p>{tennguoiuyquyen}</p>
+                          <p>{ngaysinh}</p>
+                          <p>{gioitinh}</p>
+                          <p>{quoctich}</p>
+                          <p>{sodienthoai}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-4">
+                      <div className="row">
+                        <div className="col-4 chudau1">
+                          <p>Số CMND/CCCD</p>
+                          <p>Ngày cấp</p>
+                          <p>Nơi cấp</p>
+                          <p>Mã số thuế</p>
+                          <p>Nơi cư chú</p>
+                        </div>
+                        <div className="col chucuoi1">
+                          <p>{socccd}</p>
+                          <p>{ngaycap}</p>
+                          <p>{noicap}</p>
+                          <p>{masothue}</p>
+                          <p>{noicutru}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-4">
+                      <div className="row">
+                        <div className="col-6 chudau1">
+                          <p>Email:</p>
+                          <p>Tài khoản đăng nhập:</p>
+                          <p>Mật khẩu:</p>
+                          <p>Số tài khoản:</p>
+                          <p>Ngân hàng:</p>
+                        </div>
+                        <div className="col chucuoi1">
+                          <p>{email}</p>
+                          <p>{email}</p>
+                          <p>************</p>
+                          <p>{sotaikhoan}</p>
+                          <p>{nganhang}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div id="tab2" className="tab-slider--body">
                   <h2>Second Tab</h2>
-                  <p>
-                    Cum sociis natoque penatibus et magnis dis parturient
-                    montes, nascetur ridiculus mus. Cras mattis consectetur
-                    purus sit amet fermentum. Nulla vitae elit libero, a
-                    pharetra augue. Cras mattis consectetur purus sit amet
-                    fermentum. Aenean eu leo quam. Pellentesque ornare sem
-                    lacinia quam venenatis vestibulum.
-                  </p>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="row" style={{}}>
-            <div className="col-4">
-              <div className="row">
-                <div className="col-3">
-                  <p>Số hợp đồng:</p>
-                  <p>Tên hợp đồng:</p>
-                  <p>Ngày hiệu lực:</p>
-                  <p>Ngày hết hạn:</p>
-                  <p>Tình trạng:</p>
-                </div>
-                <div className="col">
-                  <p>{sohopdong}</p>
-                  <p>{tenhopdong}</p>
-                  <p>{ngayhieuluc}</p>
-                  <p>{ngayhethan}</p>
-                  <p>Còn thời hạn</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-4">
-              <div className="row">
-                <div className="col-3">
-                  <p>Đính kèm tệp</p>
-                </div>
-                <div className="col">
-                  <p>Hetthuongmetnho.mp3</p>
-                  <p>test2.doc</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-4">
-              <div className="row">
-                <div className="col-6">
-                  <p>Mức nhuận bút</p>
-                  <p>Quyền tác giả:</p>
-                  <p>Quyền liên quan:</p>
-                  <p>Quyền của người biểu diễn:</p>
-                  <p>Quyền của nhà sản xuất {"(Bản ghi/video)"}</p>
-                </div>
-                <div className="col">
-                  <p></p>
-                  <p>
-                    <br />
-                    {quyentacgia}%
-                  </p>
-                  <p>
-                    <br />
-                  </p>
-                  <p>{quyennguoibieudien}%</p>
-                  <p>{quyennhasanxuat}%</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row" style={{ marginTop: "30px" }}>
-            <p>Thông tin pháp nhân ủy quyền</p>
-            <div className="col-4">
-              <div className="row">
-                <div className="col-4">
-                  <p>Pháp nhân ủy quyền:</p>
-                  <p>Tên người ủy quyền:</p>
-                  <p>Ngày sinh:</p>
-                  <p>Giới tính:</p>
-                  <p>Quốc tịch:</p>
-                  <p>Số điện thoại:</p>
-                </div>
-                <div className="col">
-                  <p>{phapnhanuyquyen}</p>
-                  <p>{tennguoiuyquyen}</p>
-                  <p>{ngaysinh}</p>
-                  <p>{gioitinh}</p>
-                  <p>{quoctich}</p>
-                  <p>{sodienthoai}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-4">
-              <div className="row">
-                <div className="col-4">
-                  <p>Số CMND/CCCD</p>
-                  <p>Ngày cấp</p>
-                  <p>Nơi cấp</p>
-                  <p>Mã số thuế</p>
-                  <p>Nơi cư chú</p>
-                </div>
-                <div className="col">
-                  <p>{socccd}</p>
-                  <p>{ngaycap}</p>
-                  <p>{noicap}</p>
-                  <p>{masothue}</p>
-                  <p>{noicutru}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-4">
-              <div className="row">
-                <div className="col-6">
-                  <p>Email:</p>
-                  <p>Tài khoản đăng nhập:</p>
-                  <p>Mật khẩu:</p>
-                  <p>Số tài khoản:</p>
-                  <p>Ngân hàng:</p>
-                </div>
-                <div className="col">
-                  <p>{email}</p>
-                  <p>{email}</p>
-                  <p>************</p>
-                  <p>{sotaikhoan}</p>
-                  <p>{nganhang}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>Welcome, {user ? user.email : ""}</div>
-          <button onClick={handleSignOut}>Đăng xuất</button>
         </div>
         <div className="slideright">
           <Rightbar />
         </div>
       </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </div>
   );
 }
