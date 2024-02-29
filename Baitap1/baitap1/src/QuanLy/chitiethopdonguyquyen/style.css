@@ -77,20 +77,23 @@ h2 {
 .tab-slider--trigger.active {
 	color: #fff;
 	background-color: #B65100;
+	border-radius: 80px;
 }
 
 .tab-slider--body {
 	margin-bottom: var(--base-margin);
 }
-.chudau1{
-font-family: Montserrat;
-font-size: 16px;
-font-weight: 700;
-line-height: 24px;
-letter-spacing: -0.002em;
+
+.chudau1 {
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 24px;
+	letter-spacing: -0.002em;
 
 }
-.chucuoi1{
+
+.chucuoi1 {
 	line-height: 24px;
 
 }

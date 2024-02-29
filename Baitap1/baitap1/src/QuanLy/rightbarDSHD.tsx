@@ -122,12 +122,15 @@ function RightbarDSHD() {
   return (
     <div className="app">
       <div className="sliderighthome">
+      <a href="../quanlyhopdong/create" style={{textDecoration:"none"}}>
         <div className="row profileslideright" style={{ marginTop: "22%" }}>
           <div className="imgslideright">
             <img src={VectorRef} alt="" className="imgprofileslideright" />
           </div>
           <p className="textprofileslideright">Thêm hợp đồng</p>
+         
         </div>
+        </a>
       </div>
     </div>
   );

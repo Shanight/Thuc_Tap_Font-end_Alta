@@ -21,6 +21,7 @@ function Themhopdonguyquyen() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const { id } = useParams<{ id: string }>();
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   const [selectedquoctichValue, setSelectedValue] = useState("");
 
@@ -232,10 +233,35 @@ function Themhopdonguyquyen() {
   };
 
   useEffect(() => {
+    if (saveSuccess) {
+      // Khi lưu thành công, chuyển hướng trang về http://localhost:3000/quanlyhopdong
+      navigate("/quanlyhopdong");
+    };
+
+    //lấy dữ liệu người dùng
+    const fetchUserInfo = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const userRef = doc(firestore, "users", user.uid);
+          const docSnap = await getDoc(userRef);
+
+          if (docSnap.exists()) {
+            setUserInfo(docSnap.data());
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user information: ", error);
+      }
+    };
+
+    //kết thúc lấy dữ liệu người dùng
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // Người dùng đã đăng nhập
         setUser(user);
+        fetchUserInfo();
       } else {
         // Người dùng đã đăng xuất
         navigate("/login"); // Chuyển hướng đến trang "Login"
@@ -245,7 +271,8 @@ function Themhopdonguyquyen() {
     return () => {
       unsubscribe(); // Hủy đăng ký lắng nghe khi component bị hủy
     };
-  }, [navigate]);
+    
+  }, [saveSuccess,navigate]);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -259,6 +286,10 @@ function Themhopdonguyquyen() {
       });
   };
 
+  //lấy dữ liệu người dùng
+  const [userInfo, setUserInfo] = useState<DocumentData | null>(null);
+  //end
+
   return (
     <div className="app">
       <Topbar />
@@ -267,334 +298,361 @@ function Themhopdonguyquyen() {
           <Sidebar />
         </div>
         <div className="main" style={{ width: "82%" }}>
-          <div className="row">
-            <h1>Thêm hợp đồng ủy quyền mới</h1>
-          </div>
-          <div className="row" style={{}}>
-            <div className="col-4">
-              <div className="row">
-                <div className="col-4">
-                  <p>Số hợp đồng:</p>
-                  <p>Tên hợp đồng:</p>
-                  <p>Ngày hiệu lực:</p>
-                  <p>Ngày hết hạn:</p>
+          <form>
+            <div className="row">
+              <h1>Thêm hợp đồng ủy quyền mới</h1>
+            </div>
+            <div className="row" style={{}}>
+              <div className="col-4">
+                <div className="row">
+                  <div className="col-4">
+                    <p>Số hợp đồng: </p>
+                    <p>Tên hợp đồng:</p>
+                    <p>Ngày hiệu lực:</p>
+                    <p>Ngày hết hạn:</p>
+                  </div>
+                  <div className="col">
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="sohopdongtext"
+                        required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="tenhopdongtext"
+                        required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="date"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="ngayhieuluctext"
+                        required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="date"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="ngayhethantext"
+                        required
+                      />
+                    </p>
+                  </div>
                 </div>
-                <div className="col">
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="sohopdongtext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="tenhopdongtext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="date"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="ngayhieuluctext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="date"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="ngayhethantext"
-                    />
-                  </p>
+              </div>
+
+              <div className="col-4">
+                <div className="row">
+                  <div className="col-3">
+                    <p>Đính kèm tệp</p>
+                  </div>
+                  <div className="col">
+                    <p>
+                      <input type="file" name="filecrate" id="filecrate" />
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-4">
+                <div className="row">
+                  <div className="col-6">
+                    <p>Mức nhuận bút</p>
+                    <p>Quyền tác giả:</p>
+                    <p>Quyền liên quan:</p>
+                    <p>Quyền của người biểu diễn:</p>
+                    <p>Quyền của nhà sản xuất {"(Bản ghi/video)"}</p>
+                  </div>
+                  <div className="col">
+                    <p></p>
+                    <p>
+                      <br />
+                      0%
+                    </p>
+                    <p>
+                      <br />
+                    </p>
+                    <p>50%</p>
+                    <p>50%</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="col-4">
-              <div className="row">
-                <div className="col-3">
-                  <p>Đính kèm tệp</p>
-                </div>
-                <div className="col">
-                  <p>
-                    <input type="file" name="filecrate" id="filecrate" />
-                  </p>
+            <div className="row" style={{ marginTop: "30px" }}>
+              <p>Thông tin pháp nhân ủy quyền</p>
+              <div className="col-4">
+                <div className="row">
+                  <div className="col-4">
+                    <p>Pháp nhân ủy quyền:</p>
+                    <p>Tên tổ chức:</p>
+                    <p>Mã số thuế:</p>
+                    <p>Số tài khoản:</p>
+                    <p>Ngân hàng:</p>
+                    <p>Địa chỉ:</p>
+                  </div>
+                  <div className="col">
+                    <p>
+                      <input
+                        type="radio"
+                        name="phapnhanuyquyentext"
+                        style={{}}
+                        id="canhan"
+                        value={"Cá nhân"}
+                        checked
+                      />{" "}
+                      <label htmlFor="canhan">Cá nhân</label>
+                      <input
+                        type="radio"
+                        name="phapnhanuyquyentext"
+                        style={{ marginLeft: "15px" }}
+                        id="tochuc"
+                        value={"Tổ chức"}
+                      />{" "}
+                      <label htmlFor="tochuc">Tổ chức</label>
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="tentochuctext"required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="masothuetext"
+                        required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="sotaikhoantext"
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="nganhangtext"
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="diachitext"
+                      />
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="col-4">
-              <div className="row">
-                <div className="col-6">
-                  <p>Mức nhuận bút</p>
-                  <p>Quyền tác giả:</p>
-                  <p>Quyền liên quan:</p>
-                  <p>Quyền của người biểu diễn:</p>
-                  <p>Quyền của nhà sản xuất {"(Bản ghi/video)"}</p>
-                </div>
-                <div className="col">
-                  <p></p>
-                  <p>
-                    <br />
-                    0%
-                  </p>
-                  <p>
-                    <br />
-                  </p>
-                  <p>50%</p>
-                  <p>50%</p>
+              <div className="col-4">
+                <div className="row">
+                  <div className="col-4">
+                    <p>Người đại diện</p>
+                    <p>Chức vụ</p>
+                    <p>Ngày sinh</p>
+                    <p>Giới tính</p>
+                    <p>CCCD/CMND</p>
+                    <p>Ngày cấp</p>
+                    <p>Nơi cấp</p>
+                    <p>Quốc tịch</p>
+                  </div>
+                  <div className="col">
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="nguoidaidientext"
+                        value={userInfo?.firstname}required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="chucvutext"
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="date"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="ngaysinhtext"
+                        value={userInfo?.birthday}required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="radio"
+                        name="gioitinh"
+                        style={{}}
+                        id="gioitinh1"
+                        value={"Nam"}
+                        checked
+                      />{" "}
+                      <label htmlFor="gioitinh1">Nam</label>
+                      <input
+                        type="radio"
+                        name="gioitinh"
+                        style={{ marginLeft: "15px" }}
+                        id="gioitinh2"
+                        value={"Nữ"}
+                      />{" "}
+                      <label htmlFor="gioitinh2">Nữ</label>
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="CCCDtext"required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="date"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="ngaycaptext"required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="noicaptext"required
+                      />
+                    </p>
+                    <p>
+                      <select
+                        name="quoctich"
+                        id="quoctich"
+                        className="inputtextcreatehopdonguyquyen"
+                        value={selectedquoctichValue}
+                        onChange={handleSelectquoctichChange}required
+                      >
+                        <option value="Việt Nam">Việt Nam</option>
+                        <option value="Hàn Quốc">Hàn Quốc</option>
+                      </select>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div className="row" style={{ marginTop: "30px" }}>
-            <p>Thông tin pháp nhân ủy quyền</p>
-            <div className="col-4">
-              <div className="row">
-                <div className="col-4">
-                  <p>Pháp nhân ủy quyền:</p>
-                  <p>Tên tổ chức:</p>
-                  <p>Mã số thuế:</p>
-                  <p>Số tài khoản:</p>
-                  <p>Ngân hàng:</p>
-                  <p>Địa chỉ:</p>
-                </div>
-                <div className="col">
-                  <p>
-                    <input
-                      type="radio"
-                      name="phapnhanuyquyentext"
-                      style={{}}
-                      id="canhan"
-                      value={"Cá nhân"}
-                      checked
-                    />{" "}
-                    <label htmlFor="canhan">Cá nhân</label>
-                    <input
-                      type="radio"
-                      name="phapnhanuyquyentext"
-                      style={{ marginLeft: "15px" }}
-                      id="tochuc"
-                      value={"Tổ chức"}
-                    />{" "}
-                    <label htmlFor="tochuc">Tổ chức</label>
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="tentochuctext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="masothuetext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="sotaikhoantext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="nganhangtext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="diachitext"
-                    />
-                  </p>
+              <div className="col-4">
+                <div className="row">
+                  <div className="col-4">
+                    <p>Nơi cư trú</p>
+                    <p>Số điện thoại:</p>
+                    <p>Email:</p>
+                    <p>Tên đăng nhập:</p>
+                    <p>Mật khẩu:</p>
+                  </div>
+                  <div className="col">
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="noicutrutext"
+                        minLength={3}
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="sodienthoaitext"
+                        value={userInfo?.phonenumber}
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="emailtext"
+                        defaultValue={user?.email || ""}
+                        disabled
+                        style={{ color: "#b6b6b6" }}required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="tendangnhaptext"
+                        defaultValue={user?.email || ""}
+                        disabled
+                        style={{ color: "#b6b6b6" }}required
+                      />
+                    </p>
+                    <p>
+                      <input
+                        type="password"
+                        className="inputtextcreatehopdonguyquyen"
+                        id="matkhautext"
+                        defaultValue={user?.email || ""}
+                        disabled
+                        style={{ color: "#b6b6b6" }}required
+                      />
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div className="col-4">
-              <div className="row">
-                <div className="col-4">
-                  <p>Người đại diện</p>
-                  <p>Chức vụ</p>
-                  <p>Ngày sinh</p>
-                  <p>Giới tính</p>
-                  <p>CCCD/CMND</p>
-                  <p>Ngày cấp</p>
-                  <p>Nơi cấp</p>
-                  <p>Quốc tịch</p>
-                </div>
-                <div className="col">
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="nguoidaidientext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="chucvutext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="date"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="ngaysinhtext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="radio"
-                      name="gioitinh"
-                      style={{}}
-                      id="gioitinh1"
-                      value={"Nam"}
-                      checked
-                    />{" "}
-                    <label htmlFor="gioitinh1">Nam</label>
-                    <input
-                      type="radio"
-                      name="gioitinh"
-                      style={{ marginLeft: "15px" }}
-                      id="gioitinh2"
-                      value={"Nữ"}
-                    />{" "}
-                    <label htmlFor="gioitinh2">Nữ</label>
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="CCCDtext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="date"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="ngaycaptext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="noicaptext"
-                    />
-                  </p>
-                  <p>
-                    <select
-                      name="quoctich"
-                      id="quoctich"
-                      className="inputtextcreatehopdonguyquyen"
-                      value={selectedquoctichValue}
-                      onChange={handleSelectquoctichChange}
-                    >
-                      <option value="Việt Nam">Việt Nam</option>
-                      <option value="Hàn Quốc">Hàn Quốc</option>
-                    </select>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-4">
-              <div className="row">
-                <div className="col-4">
-                  <p>Nơi cư trú</p>
-                  <p>Số điện thoại:</p>
-                  <p>Email:</p>
-                  <p>Tên đăng nhập:</p>
-                  <p>Mật khẩu:</p>
-                </div>
-                <div className="col">
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="noicutrutext"
-                      minLength={3}
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="sodienthoaitext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="emailtext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="tendangnhaptext"
-                    />
-                  </p>
-                  <p>
-                    <input
-                      type="text"
-                      className="inputtextcreatehopdonguyquyen"
-                      id="matkhautext"
-                    />
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div
-              className="col"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "40px",
-              }}
-            >
-              <a href="http://localhost:3000/quanlyhopdong/" style={{
-                paddingRight:"40px"
-              }}>
-                <button
+            <div className="row">
+              <div
+                className="col"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "40px",
+                }}
+              >
+                <a
+                  href="http://localhost:3000/quanlyhopdong/"
                   style={{
-                    background: "none",
-                    border: "1px solid #FF7506",
-                    color: "#FF7506",
+                    paddingRight: "40px",
+                  }}
+                >
+                  <input
+                    type="button"
+                    style={{
+                      background: "none",
+                      border: "1px solid #FF7506",
+                      color: "#FF7506",
+                      width: "168px",
+                      height: "48px",
+                      borderRadius: "8px",
+                    }}
+                    value={"Hủy"}
+                  />
+                </a>
+                <input
+                  type="button"
+                  style={{
+                    backgroundColor: "#FF7506",
+                    color: "white",
                     width: "168px",
                     height: "48px",
                     borderRadius: "8px",
                   }}
-                >
-                  {" "}
-                  Hủy
-                </button>
-              </a>
-              <button
-                onClick={handleSubmit}
-                style={{ backgroundColor: "#FF7506",color:"white", width:"168px",height:"48px", borderRadius:"8px" }}
-              >
-                Lưu
-              </button>
+                  value={"Lưu"}
+                  onClick={handleSubmit}
+                />
+              </div>
             </div>
-          </div>
+          </form>
         </div>
         <div className="slideright">
           <Rightbar />

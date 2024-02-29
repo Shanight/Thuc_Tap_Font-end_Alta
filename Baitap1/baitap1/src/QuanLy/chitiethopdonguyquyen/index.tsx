@@ -53,7 +53,6 @@ function Chitiethopdonguyquyen() {
       try {
         if (!id) {
           console.log("ID not found!");
-          // Thực hiện các xử lý bổ sung tại đây, ví dụ: redirect hoặc hiển thị thông báo lỗi
           return;
         }
 
@@ -106,7 +105,7 @@ function Chitiethopdonguyquyen() {
       }
     });
 
-    //hieuung
+    //HIệu ứng chuyển slide
     const tabBodies = document.querySelectorAll(".tab-slider--body");
     tabBodies.forEach((body, index) => {
       if (index === 0) {
@@ -214,10 +213,10 @@ function Chitiethopdonguyquyen() {
                           <p>Tình trạng:</p>
                         </div>
                         <div className="col chucuoi1">
-                          <p>{sohopdong}</p>
-                          <p>{tenhopdong}</p>
-                          <p>{ngayhieuluc}</p>
-                          <p>{ngayhethan}</p>
+                          {sohopdong !== "" ? <p>{sohopdong}</p> : <><br /><p /></>}
+                          {tenhopdong !== "" ? <p>{tenhopdong}</p> : <><br /><p /></>}
+                          {ngayhieuluc !== "" ? <p>{ngayhieuluc}</p> : <><br /><p /></>}
+                          {ngayhethan !== "" ? <p>{ngayhethan}</p> : <><br /><p /></>}
                           <p>Còn thời hạn</p>
                         </div>
                       </div>
@@ -226,7 +225,7 @@ function Chitiethopdonguyquyen() {
                     <div className="col-4">
                       <div className="row">
                         <div className="col-3 chudau1">
-                          <p>Đính kèm tệp</p>
+                          <p>Đính kèm tệp:</p>
                         </div>
                         <div className="col chucuoi1">
                           <p>Hetthuongmetnho.mp3</p>
@@ -238,22 +237,32 @@ function Chitiethopdonguyquyen() {
                     <div className="col-4">
                       <div className="row">
                         <div className="col-6 chudau1">
-                          <p>Mức nhuận bút</p>
+                          <p>Mức nhuận bút:</p>
                           <p>Quyền tác giả:</p>
                           <p>Quyền liên quan:</p>
                           <p>Quyền của người biểu diễn:</p>
-                          <p>Quyền của nhà sản xuất {"(Bản ghi/video)"}</p>
+                          <p>Quyền của nhà sản xuất {"(Bản ghi/video)"}:</p>
                         </div>
                         <div className="col chucuoi1">
-                          <p></p>
+                          {quyentacgia !== "" ? (
+                            <p>{quyentacgia}%</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {quyentacgia}%
+                            </>
+                          )}
                           <p>
-                            <br />
-                            {quyentacgia}%
+                            <br /><p />
                           </p>
-                          <p>
-                            <br />
-                          </p>
-                          <p>{quyennguoibieudien}%</p>
+                          {quyennguoibieudien !== "" ? (
+                            <p>{quyennguoibieudien}%</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {quyennguoibieudien}%
+                            </>
+                          )}
                           <p>{quyennhasanxuat}%</p>
                         </div>
                       </div>
@@ -261,7 +270,7 @@ function Chitiethopdonguyquyen() {
                   </div>
 
                   <div className="row" style={{ marginTop: "30px" }}>
-                    <p>Thông tin pháp nhân ủy quyền</p>
+                    <p>Thông tin pháp nhân ủy quyền:</p>
                     <div className="col-4">
                       <div className="row">
                         <div className="col-4 chudau1">
@@ -273,12 +282,54 @@ function Chitiethopdonguyquyen() {
                           <p>Số điện thoại:</p>
                         </div>
                         <div className="col chucuoi1">
-                          <p>{phapnhanuyquyen}</p>
-                          <p>{tennguoiuyquyen}</p>
-                          <p>{ngaysinh}</p>
-                          <p>{gioitinh}</p>
-                          <p>{quoctich}</p>
-                          <p>{sodienthoai}</p>
+                          {phapnhanuyquyen !== "" ? (
+                            <p>{phapnhanuyquyen}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {phapnhanuyquyen}
+                            </>
+                          )}
+                          {tennguoiuyquyen !== "" ? (
+                            <p>{tennguoiuyquyen}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {tennguoiuyquyen}
+                            </>
+                          )}
+                          {ngaysinh !== "" ? (
+                            <p>{ngaysinh}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {ngaysinh}
+                            </>
+                          )}
+                          {gioitinh !== "" ? (
+                            <p>{gioitinh}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {gioitinh}
+                            </>
+                          )}
+                          {quoctich !== "" ? (
+                            <p>{quoctich}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {quoctich}
+                            </>
+                          )}
+                          {sodienthoai !== "" ? (
+                            <p>{sodienthoai}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {sodienthoai}
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -286,18 +337,53 @@ function Chitiethopdonguyquyen() {
                     <div className="col-4">
                       <div className="row">
                         <div className="col-4 chudau1">
-                          <p>Số CMND/CCCD</p>
-                          <p>Ngày cấp</p>
-                          <p>Nơi cấp</p>
-                          <p>Mã số thuế</p>
-                          <p>Nơi cư chú</p>
+                          <p>Số CMND/CCCD:</p>
+                          <p>Ngày cấp:</p>
+                          <p>Nơi cấp:</p>
+                          <p>Mã số thuế:</p>
+                          <p>Nơi cư chú:</p>
                         </div>
                         <div className="col chucuoi1">
-                          <p>{socccd}</p>
-                          <p>{ngaycap}</p>
-                          <p>{noicap}</p>
-                          <p>{masothue}</p>
-                          <p>{noicutru}</p>
+                          {socccd !== "" ? (
+                            <p>{socccd}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {socccd}
+                            </>
+                          )}
+                          {ngaycap !== "" ? (
+                            <p>{ngaycap}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {ngaycap}
+                            </>
+                          )}
+                          {noicap !== "" ? (
+                            <p>{noicap}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {noicap}
+                            </>
+                          )}
+                          {masothue !== "" ? (
+                            <p>{masothue}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {masothue}
+                            </>
+                          )}
+                          {noicutru !== "" ? (
+                            <p>{noicutru}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {noicutru}
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -312,11 +398,39 @@ function Chitiethopdonguyquyen() {
                           <p>Ngân hàng:</p>
                         </div>
                         <div className="col chucuoi1">
-                          <p>{email}</p>
-                          <p>{email}</p>
+                          {email !== "" ? (
+                            <p>{email}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {email}
+                            </>
+                          )}
+                          {email !== "" ? (
+                            <p>{email}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {email}
+                            </>
+                          )}
                           <p>************</p>
-                          <p>{sotaikhoan}</p>
-                          <p>{nganhang}</p>
+                          {sotaikhoan !== "" ? (
+                            <p>{sotaikhoan}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {sotaikhoan}
+                            </>
+                          )}
+                          {nganhang !== "" ? (
+                            <p>{nganhang}</p>
+                          ) : (
+                            <>
+                              <br /><p />
+                              {nganhang}
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>

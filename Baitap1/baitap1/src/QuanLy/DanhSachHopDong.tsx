@@ -386,8 +386,7 @@ function DanhSachHopDong() {
             </div>
           </div>
 
-          <div>Welcome, {user ? user.email : ""}</div>
-          <button onClick={handleSignOut}>Đăng xuất</button>
+          
         </div>
         <div className="slideright">
           <RightbarDSHD />

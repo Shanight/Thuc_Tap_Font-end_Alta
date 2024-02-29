@@ -54,7 +54,7 @@ function Profile() {
       try {
         const user = auth.currentUser;
         if (user) {
-          const userRef = doc(firestore, 'users', user.uid);
+          const userRef = doc(firestore, "users", user.uid);
           const docSnap = await getDoc(userRef);
 
           if (docSnap.exists()) {
@@ -62,11 +62,10 @@ function Profile() {
           }
         }
       } catch (error) {
-        console.error('Error fetching user information: ', error);
+        console.error("Error fetching user information: ", error);
       }
     };
 
-    
     //kết thúc lấy dữ liệu người dùng
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -99,115 +98,119 @@ function Profile() {
 
   return (
     <div className="main">
-          <div className="row">
-            <h1 className="tieude">Thông tin cơ bản</h1>
-          </div>
-          
-          <div className="row thongtinchitietprofile">
-            <div className="col-6">
-              <img src={userInfo?.imageuser} alt="" className="profileimage" />
-              <div className="backgroupprofileimage2">
-                <img src={cameraRef} alt="" className="profileimage2" />
-              </div>
+      <div className="row">
+        <h1 className="tieude">Thông tin cơ bản</h1>
+      </div>
 
-              <p
-                style={{
-                  color: "#F5F5FF",
-                  marginTop: "15px",
-                  marginLeft: "85px",
-                  fontFamily: "Montserrat",
-                  fontWeight: "600",
-                  fontSize: "20px",
-                  lineHeight: "24px",
-                }}
-              >
-                {userInfo?.lastname} {userInfo?.firstname}
-              </p>
+      <div className="row thongtinchitietprofile">
+        <div className="col-6">
+          <img src={userInfo?.imageuser} alt="" className="profileimage" />
+          <div className="backgroupprofileimage2">
+            <img src={cameraRef} alt="" className="profileimage2" />
+          </div>
+
+          <p
+            style={{
+              color: "#F5F5FF",
+              marginTop: "15px",
+              marginLeft: "85px",
+              fontFamily: "Montserrat",
+              fontWeight: "600",
+              fontSize: "20px",
+              lineHeight: "24px",
+            }}
+          >
+            {userInfo?.lastname} {userInfo?.firstname}
+          </p>
+        </div>
+        <div className="col-6">
+          <form className="row g-3">
+            <div className="col-md-6">
+              <label htmlFor="inputtext" className="form-label">
+                Họ:
+              </label>
+              <input
+                type="text"
+                className="form-control profile"
+                id="inputtext"
+                value={userInfo?.firstname}
+                disabled
+              />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="inputten" className="form-label">
+                Tên:
+              </label>
+              <input
+                type="text"
+                className="form-control profile"
+                id="inputten"
+                value={userInfo?.lastname}
+                disabled
+              />
             </div>
             <div className="col-6">
-              <form className="row g-3">
-                <div className="col-md-6">
-                  <label htmlFor="inputtext" className="form-label">
-                    Họ:
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control profile"
-                    id="inputtext"
-                    value={userInfo?.firstname}disabled
-                  />
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="inputten" className="form-label">
-                    Tên:
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control profile"
-                    id="inputten"
-                    value={userInfo?.lastname}disabled
-                  />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="inputdate" className="form-label">
-                    Ngày sinh:
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control profile"
-                    id="inputdate"
-                    value={userInfo?.birthday}disabled
-                  />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="inputAddress2" className="form-label">
-                    Số điện thoại:
-                  </label>
-                  <input
-                    type="tel"
-                    className="form-control profile"
-                    id="inputAddress2"
-                    value={userInfo?.phonenumber}disabled
-                  />
-                </div>
-                <div className="col-md-12">
-                  <label htmlFor="inputCity" className="form-label">
-                    Email:
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control profile disabledprofile"
-                    disabled
-                    value={userInfo?.email}
-                  />
-                </div>
-                <div className="col-md-12">
-                  <label htmlFor="inputState" className="form-label">
-                    Tên đăng nhập:
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control profile disabledprofile"
-                    disabled
-                    value={userInfo?.email}
-                  />
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="inputZip" className="form-label">
-                    Phân quyền
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control profile disabledprofile"
-                    id="inputZip"
-                    disabled
-                    value={userInfo?.role}
-                  />
-                </div>
-              </form>
+              <label htmlFor="inputdate" className="form-label">
+                Ngày sinh:
+              </label>
+              <input
+                type="date"
+                className="form-control profile"
+                id="inputdate"
+                value={userInfo?.birthday}
+                disabled
+              />
             </div>
-          </div>
+            <div className="col-6">
+              <label htmlFor="inputAddress2" className="form-label">
+                Số điện thoại:
+              </label>
+              <input
+                type="tel"
+                className="form-control profile"
+                id="inputAddress2"
+                value={userInfo?.phonenumber}
+                disabled
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputCity" className="form-label">
+                Email:
+              </label>
+              <input
+                type="email"
+                className="form-control profile disabledprofile"
+                disabled
+                value={userInfo?.email}
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputState" className="form-label">
+                Tên đăng nhập:
+              </label>
+              <input
+                type="text"
+                className="form-control profile disabledprofile"
+                disabled
+                value={userInfo?.email}
+              />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="inputZip" className="form-label">
+                Phân quyền
+              </label>
+              <input
+                type="text"
+                className="form-control profile disabledprofile"
+                id="inputZip"
+                disabled
+                value={userInfo?.role}
+              />
+            </div>
+          </form>
         </div>
+      </div>
+    </div>
   );
 }
 
