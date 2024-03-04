@@ -583,38 +583,7 @@ function Chitiethopdonguyquyen() {
                 </ul>
               </div>
             </div>
-            <div className="col-2 theloai">
-              Hiệu lực hợp đồng:
-              <div className="dropdown-center dropdownhome">
-                <button
-                  className="btn dropdown-toggle dropdownbutton"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ width: "100%" }}
-                >
-                  Tất cả
-                </button>
-                <ul className="dropdown-menu" style={{ width: "100%" }}>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Tất cả
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Duyệt bởi người dùng
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Duyệt tự động
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-4"></div>
+            <div className="col-6"></div>
             <div className="col-2">
             <form className="d-flex mt-3 search" role="search">
               <input
@@ -633,7 +602,7 @@ function Chitiethopdonguyquyen() {
             </form>
             </div>
           </div>
-          <div className="row sanpham" style={{ width: "1441px" }}>
+          <div className="row sanpham" style={{ width: "100%" }}>
             <div className="sanphamchitiet">
               <table>
                 <thead style={{lineHeight:"60px"}}>
@@ -645,14 +614,14 @@ function Chitiethopdonguyquyen() {
                       color: "#FFAC69",
                     }}
                   >
-                    <td width={"100px"}>STT</td>
-                    <td width={"100px"}>Tên bản ghi</td>
-                    <td width={"15%"}>Mã ISRC</td>
-                    <td width={"14%"}>Ca sĩ</td>
-                    <td width={"14%"}>Tác giả</td>
-                    <td width={"13%"}>Ngày tải</td>
-                    <td width={"10%"}>Tình trạng</td>
-                    <td width={"9%"}></td>
+                    <td width={"80px"}>STT</td>
+                    <td width={"300px"}>Tên bản ghi</td>
+                    <td width={"200px"}>Mã ISRC</td>
+                    <td width={"240px"}>Ca sĩ</td>
+                    <td width={"240px"}>Tác giả</td>
+                    <td width={"240px"}>Ngày tải</td>
+                    <td width={"240px"}>Tình trạng</td>
+                    <td width={"100px"}></td>
                   </tr>
                 </thead>
                 <tbody>
@@ -667,13 +636,13 @@ function Chitiethopdonguyquyen() {
                       }}
                     >
                       <td >{index + 1}</td>
-                      <td width={"25%"}>{data.TenBanGhi}</td>
-                      <td width={"15%"}>{data.MaISRC}</td>
-                      <td width={"14%"}>{data.CaSi}</td>
-                      <td width={"14%"}>{data.TacGia}</td>
-                      <td width={"13%"}>{data.NgayTai}</td>
-                      <td width={"10%"}>{data.TinhTrang}</td>
-                      <td width={"9%"} >
+                      <td >{data.TenBanGhi}</td>
+                      <td >{data.MaISRC}</td>
+                      <td >{data.CaSi}</td>
+                      <td >{data.TacGia}</td>
+                      <td >{data.NgayTai}</td>
+                      <td >{data.TinhTrang}</td>
+                      <td  >
                         <Link to={`#`} style={{ color: "#FF7506" }}>Nghe</Link>
                       </td>
 

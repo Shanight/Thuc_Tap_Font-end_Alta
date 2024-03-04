@@ -11,6 +11,7 @@ import {
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../firebase";
 import "firebase/firestore";
+import "./style.css";
 const auth = getAuth();
 
 function Rightbar() {
@@ -122,6 +123,174 @@ function Rightbar() {
             <img src={fi_editRef} alt="" className="imgprofileslideright" />
           </div>
           <p className="textprofileslideright">Quản lý phê duyệt</p>
+        </div>
+        <div
+          className="row profileslideright"
+          style={{ marginTop: "22%" }}
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          <div className="imgslideright">
+            <img src={fi_editRef} alt="" className="imgprofileslideright" />
+          </div>
+          <p className="textprofileslideright">Thêm bản ghi mới</p>
+        </div>
+        {/* popup */}
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex={-1}
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div
+              className="modal-content"
+              style={{
+                height: "524px",
+                borderRadius: "16px",
+                padding: "32px, 40px, 40px, 40px",
+                background: "#3E3E5B",
+              }}
+            >
+              <div className="modal-header">
+                <h3
+                  className=""
+                  id="exampleModalLabel"
+                  style={{ textAlign: "center", width: "100%" }}
+                >
+                  Thêm bản ghi mới
+                </h3>
+              </div>
+              <div className="modal-body">
+                <form className="row">
+                  <div className="col-md-12">
+                    <label
+                      htmlFor="tenbanghiupload"
+                      style={{ textAlign: "left", width: "100%" }}
+                    >
+                      Tên bản ghi
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="tenbanghiupload"
+                      defaultValue="Mark"
+                      required
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <label
+                      htmlFor="maisrcupload"
+                      style={{ textAlign: "left", width: "100%" }}
+                    >
+                      Mã ISRC:
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="maisrcupload"
+                      defaultValue="Otto"
+                      required
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <label
+                      htmlFor="tacgiaupload"
+                      style={{ textAlign: "left", width: "100%" }}
+                    >
+                      Tác giả:
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="tacgiaupload"
+                      defaultValue="Otto"
+                      required
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <label
+                      htmlFor="casiupload"
+                      style={{ textAlign: "left", width: "100%" }}
+                    >
+                      Ca sĩ/ nhóm nhạc:
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="casiupload"
+                      defaultValue="Otto"
+                      required
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label
+                      htmlFor="validationDefault04"
+                      style={{ textAlign: "left", width: "100%" }}
+                    >
+                      Thể loại
+                    </label>
+                    <select
+                      className="form-select"
+                      id="validationDefault04"
+                      required
+                    >
+                      <option selected disabled>
+                        Chọn một thể loại
+                      </option>
+                      <option>Rap</option>
+                      <option>Ballad</option>
+                      <option>Rock N Roll</option>
+                      <option>R&B</option>
+                    </select>
+                  </div>
+                  <div className="col-md-6">
+                    <label
+                      htmlFor="nsxupload"
+                      style={{ textAlign: "left", width: "100%" }}
+                    >
+                      Nhà sản xuất
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="nsxupload"
+                      required
+                    />
+                  </div>
+
+                  <div className="col-12 p-3">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                      style={{
+                        background: "none",
+                        border: "1px solid #FF7506",
+                        color: "#FF7506",
+                        width: "168px",
+                        height: "48px",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      Hủy
+                    </button>
+                    <button className="btn btn-primary" type="submit"style={{
+                      backgroundColor: "#FF7506",
+                      color: "white",
+                      width: "168px",
+                      height: "48px",
+                      borderRadius: "8px",
+                      marginLeft:"10px"
+                    }}>
+                      Tải lên
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
