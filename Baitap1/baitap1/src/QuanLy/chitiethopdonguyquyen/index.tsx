@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../slidebar/Slidebar";
 import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";
 import Topbar from "../../slidebar/topbar";
@@ -23,6 +23,26 @@ import "./style.css";
 const auth = getAuth();
 
 function Chitiethopdonguyquyen() {
+  //Lấy ảnh
+  const [buttonltorRef, setbuttonltorUrl] = useState("");
+  const [buttonrtolRef, setbuttonrtolUrl] = useState("");
+
+  useEffect(() => {
+    const buttonltorRef = ref(storage, "icon/buttonltor.png");
+    const buttonrtolRef = ref(storage, "icon/buttonrtol.png");
+
+    Promise.all([getDownloadURL(buttonltorRef), getDownloadURL(buttonrtolRef)])
+      .then((urls) => {
+        setbuttonltorUrl(urls[0]);
+        setbuttonrtolUrl(urls[1]);
+      })
+      .catch((error) => {
+        console.log("Error getting URLs:", error);
+      });
+  }, []);
+
+
+
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const { id } = useParams<{ id: string }>();
@@ -48,7 +68,37 @@ function Chitiethopdonguyquyen() {
   const [email, setemail] = useState();
   const [sotaikhoan, setsotaikhoan] = useState();
   const [nganhang, setnganhang] = useState();
+
+  const [Casi, setcasi] = useState();
+  const [MaISRC, setmaisrc] = useState();
+  const [ngaytai, setngaytai] = useState();
+  const [tacgia, settacgia] = useState();
+  const [tenbanghi, settenbanghi] = useState();
+  const [tinhtrang, settinhtrang] = useState();
+  const [filteredData, setData] = useState<DocumentData[]>([]);
+
   useEffect(() => {
+    const fetchDuLieuBaiHat = async () => {
+      try {
+        if (!id) {
+          console.log("ID not found!");
+          return;
+        }
+
+        const baiHatRef = doc(firestore, "BaiHat", id);
+        const docSnap = await getDoc(baiHatRef);
+
+        if (docSnap.exists()) {
+          const duLieuBaiHat = docSnap.data();
+          console.log(duLieuBaiHat.CaSi);
+          // Thực hiện các xử lý khác với dữ liệu bài hát
+        }
+      } catch (error) {
+        console.error("Error fetching bai hat information: ", error);
+      }
+    };
+    fetchDuLieuBaiHat();
+
     const fetchData = async () => {
       try {
         if (!id) {
@@ -56,9 +106,21 @@ function Chitiethopdonguyquyen() {
           return;
         }
 
+        const querySnapshot = await getDocs(collection(firestore, "BaiHat"));
+        const filteredData: DocumentData[] = [];
+
+        querySnapshot.forEach((doc) => {
+          if (doc.data().idhopdong === id) {
+            filteredData.push(doc.data());
+          } else {
+            console.log("Thất bại");
+          }
+        });
+
+        setData(filteredData);
+
         const quanlyRef = doc(firestore, "quanlyhopdong", id);
         const docSnap = await getDoc(quanlyRef);
-        const fetchedData: DocumentData[] = [];
 
         if (docSnap.exists()) {
           const data = docSnap.data();
@@ -201,6 +263,7 @@ function Chitiethopdonguyquyen() {
                 </ul>
               </div>
               <div className="tab-slider--container">
+                {/*TAB 1*/}
                 <div id="tab1" className="tab-slider--body">
                   <div className="row" style={{}}>
                     <div className="col-4">
@@ -213,10 +276,38 @@ function Chitiethopdonguyquyen() {
                           <p>Tình trạng:</p>
                         </div>
                         <div className="col chucuoi1">
-                          {sohopdong !== "" ? <p>{sohopdong}</p> : <><br /><p /></>}
-                          {tenhopdong !== "" ? <p>{tenhopdong}</p> : <><br /><p /></>}
-                          {ngayhieuluc !== "" ? <p>{ngayhieuluc}</p> : <><br /><p /></>}
-                          {ngayhethan !== "" ? <p>{ngayhethan}</p> : <><br /><p /></>}
+                          {sohopdong !== "" ? (
+                            <p>{sohopdong}</p>
+                          ) : (
+                            <>
+                              <br />
+                              <p />
+                            </>
+                          )}
+                          {tenhopdong !== "" ? (
+                            <p>{tenhopdong}</p>
+                          ) : (
+                            <>
+                              <br />
+                              <p />
+                            </>
+                          )}
+                          {ngayhieuluc !== "" ? (
+                            <p>{ngayhieuluc}</p>
+                          ) : (
+                            <>
+                              <br />
+                              <p />
+                            </>
+                          )}
+                          {ngayhethan !== "" ? (
+                            <p>{ngayhethan}</p>
+                          ) : (
+                            <>
+                              <br />
+                              <p />
+                            </>
+                          )}
                           <p>Còn thời hạn</p>
                         </div>
                       </div>
@@ -248,18 +339,21 @@ function Chitiethopdonguyquyen() {
                             <p>{quyentacgia}%</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {quyentacgia}%
                             </>
                           )}
                           <p>
-                            <br /><p />
+                            <br />
+                            <p />
                           </p>
                           {quyennguoibieudien !== "" ? (
                             <p>{quyennguoibieudien}%</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {quyennguoibieudien}%
                             </>
                           )}
@@ -286,7 +380,8 @@ function Chitiethopdonguyquyen() {
                             <p>{phapnhanuyquyen}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {phapnhanuyquyen}
                             </>
                           )}
@@ -294,7 +389,8 @@ function Chitiethopdonguyquyen() {
                             <p>{tennguoiuyquyen}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {tennguoiuyquyen}
                             </>
                           )}
@@ -302,7 +398,8 @@ function Chitiethopdonguyquyen() {
                             <p>{ngaysinh}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {ngaysinh}
                             </>
                           )}
@@ -310,7 +407,8 @@ function Chitiethopdonguyquyen() {
                             <p>{gioitinh}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {gioitinh}
                             </>
                           )}
@@ -318,7 +416,8 @@ function Chitiethopdonguyquyen() {
                             <p>{quoctich}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {quoctich}
                             </>
                           )}
@@ -326,7 +425,8 @@ function Chitiethopdonguyquyen() {
                             <p>{sodienthoai}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {sodienthoai}
                             </>
                           )}
@@ -348,7 +448,8 @@ function Chitiethopdonguyquyen() {
                             <p>{socccd}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {socccd}
                             </>
                           )}
@@ -356,7 +457,8 @@ function Chitiethopdonguyquyen() {
                             <p>{ngaycap}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {ngaycap}
                             </>
                           )}
@@ -364,7 +466,8 @@ function Chitiethopdonguyquyen() {
                             <p>{noicap}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {noicap}
                             </>
                           )}
@@ -372,7 +475,8 @@ function Chitiethopdonguyquyen() {
                             <p>{masothue}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {masothue}
                             </>
                           )}
@@ -380,7 +484,8 @@ function Chitiethopdonguyquyen() {
                             <p>{noicutru}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {noicutru}
                             </>
                           )}
@@ -402,7 +507,8 @@ function Chitiethopdonguyquyen() {
                             <p>{email}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {email}
                             </>
                           )}
@@ -410,7 +516,8 @@ function Chitiethopdonguyquyen() {
                             <p>{email}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {email}
                             </>
                           )}
@@ -419,7 +526,8 @@ function Chitiethopdonguyquyen() {
                             <p>{sotaikhoan}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {sotaikhoan}
                             </>
                           )}
@@ -427,7 +535,8 @@ function Chitiethopdonguyquyen() {
                             <p>{nganhang}</p>
                           ) : (
                             <>
-                              <br /><p />
+                              <br />
+                              <p />
                               {nganhang}
                             </>
                           )}
@@ -436,8 +545,272 @@ function Chitiethopdonguyquyen() {
                     </div>
                   </div>
                 </div>
+
+                {/*TAB 2*/}
                 <div id="tab2" className="tab-slider--body">
-                  <h2>Second Tab</h2>
+                  <div
+            className="row test1"
+            style={{ width: "110%", marginBottom: "10px" }}
+          >
+            <div className="col-2 theloai">
+              Tình trạng phê duyệt:
+              <div className="dropdown-center dropdownhome">
+                <button
+                  className="btn dropdown-toggle dropdownbutton"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style={{ width: "100%" }}
+                >
+                  Tất cả
+                </button>
+                <ul className="dropdown-menu" style={{ width: "100%" }}>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Tất cả
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Còn thời hạn
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Hết hạn
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-2 theloai">
+              Hiệu lực hợp đồng:
+              <div className="dropdown-center dropdownhome">
+                <button
+                  className="btn dropdown-toggle dropdownbutton"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style={{ width: "100%" }}
+                >
+                  Tất cả
+                </button>
+                <ul className="dropdown-menu" style={{ width: "100%" }}>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Tất cả
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Duyệt bởi người dùng
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Duyệt tự động
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-4"></div>
+            <div className="col-2">
+            <form className="d-flex mt-3 search" role="search">
+              <input
+                className="form-control me-2 labelsearch bg-transparent focus:bg-transparent border-none hover:bg-transparent placeholder:text-[#727288] focus:ring-0 h-full text-base font-normal font-['Montserrat'] leading-normal"
+                type="search"
+                placeholder="Tên bản ghi, ca sĩ,..."
+                aria-label="Search"
+              />
+              <button
+                className="searchicon"
+                type="button"
+                style={{ background: "none", border: "none", color: "white" }}
+              >
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>
+            </form>
+            </div>
+          </div>
+          <div className="row sanpham" style={{ width: "1441px" }}>
+            <div className="sanphamchitiet">
+              <table>
+                <thead style={{lineHeight:"60px"}}>
+                  <tr
+                    style={{
+                      fontSize: "13px",
+                      lineHeight: "50px",
+                      fontWeight: "700",
+                      color: "#FFAC69",
+                    }}
+                  >
+                    <td width={"100px"}>STT</td>
+                    <td width={"100px"}>Tên bản ghi</td>
+                    <td width={"15%"}>Mã ISRC</td>
+                    <td width={"14%"}>Ca sĩ</td>
+                    <td width={"14%"}>Tác giả</td>
+                    <td width={"13%"}>Ngày tải</td>
+                    <td width={"10%"}>Tình trạng</td>
+                    <td width={"9%"}></td>
+                  </tr>
+                </thead>
+                <tbody>
+                
+                  {filteredData.map((data,index) => (
+                    <tr
+                      key={index}
+                      style={{
+                        fontFamily: "Montserrat",
+                        fontSize: "13px",
+                        lineHeight: "30px",
+                      }}
+                    >
+                      <td >{index + 1}</td>
+                      <td width={"25%"}>{data.TenBanGhi}</td>
+                      <td width={"15%"}>{data.MaISRC}</td>
+                      <td width={"14%"}>{data.CaSi}</td>
+                      <td width={"14%"}>{data.TacGia}</td>
+                      <td width={"13%"}>{data.NgayTai}</td>
+                      <td width={"10%"}>{data.TinhTrang}</td>
+                      <td width={"9%"} >
+                        <Link to={`#`} style={{ color: "#FF7506" }}>Nghe</Link>
+                      </td>
+
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="sanphamchitiet" style={{ minHeight: "50px" }}>
+              <tr
+                style={{
+                  fontSize: "13px",
+                  lineHeight: "30px",
+                  fontWeight: "700",
+                  color: "#FFAC69",
+                  width: "100%",
+                }}
+              >
+                <td width={"18%"}>
+                  Hiển thị{" "}
+                  <input
+                    type="number"
+                    style={{
+                      background:
+                        "linear-gradient(0deg, #2B2B3F, #2B2B3F),linear-gradient(0deg, #FF7506, #FF7506)",
+                      width: "48.37px",
+                      height: "32px",
+                      padding: "6px, 16.19px, 5px, 16.19px",
+                      borderRadius: "4px",
+                      border: "1px solid #FF7506",
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                    min={10}
+                    max={20}
+                    defaultValue={10}
+                  />
+                  hàng trong mỗi trang
+                </td>
+                <td width={"48%"}></td>
+                <td width={"10%"}>
+                  <nav aria-label="...">
+                    <ul className="pagination">
+                      <li className="page-item">
+                        <a
+                          className="page-link"
+                          href="1"
+                          style={{ background: "none", border: "none" }}
+                        >
+                          <img src={buttonrtolRef} alt="" />{" "}
+                        </a>
+                      </li>
+                      <li className="page-item">
+                        <a
+                          className="page-link"
+                          href="1"
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: "rgb(245 245 254 / 56%)",
+                          }}
+                        >
+                          1
+                        </a>
+                      </li>
+                      <li className="page-item" aria-current="page">
+                        <a
+                          className="page-link"
+                          href="#"
+                          style={{
+                            backgroundColor: "#FF750680",
+                            border: "none",
+                            color: "#F5F5FF",
+                            borderRadius: "50px",
+                            height: "40px",
+                            width: "40px",
+                            textAlign: "center",
+                          }}
+                        >
+                          2
+                        </a>
+                      </li>
+                      <li className="page-item">
+                        <a
+                          className="page-link"
+                          href="#"
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: "rgb(245 245 254 / 56%)",
+                          }}
+                        >
+                          3
+                        </a>
+                      </li>
+                      <li className="page-item">
+                        <a
+                          className="page-link disabled"
+                          href="#"
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: "rgb(245 245 254 / 56%)",
+                          }}
+                        >
+                          ...
+                        </a>
+                      </li>
+                      <li className="page-item">
+                        <a
+                          className="page-link"
+                          href="#"
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: "rgb(245 245 254 / 56%)",
+                          }}
+                        >
+                          100
+                        </a>
+                      </li>
+                      <li className="page-item">
+                        <a
+                          className="page-link"
+                          href="#"
+                          style={{ background: "none", border: "none" }}
+                        >
+                          <img src={buttonltorRef} alt="" />
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </td>
+              </tr>
+            </div>
+          </div>
+                  
                 </div>
               </div>
             </div>
