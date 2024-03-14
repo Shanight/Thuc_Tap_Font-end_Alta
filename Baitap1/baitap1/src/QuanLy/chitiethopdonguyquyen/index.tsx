@@ -41,8 +41,6 @@ function Chitiethopdonguyquyen() {
       });
   }, []);
 
-
-
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const { id } = useParams<{ id: string }>();
@@ -209,14 +207,44 @@ function Chitiethopdonguyquyen() {
   };
   //end
 
+  function closeNav() {
+    const mySidenav = document.getElementById("mySidenav");
+    const main = document.getElementById("main");
+
+    if (mySidenav && main) {
+      mySidenav.style.width = "0";
+      main.style.marginLeft = "0";
+    }
+  }
+
+  function openNav() {
+    const mySidenav = document.getElementById("mySidenav");
+    const main = document.getElementById("main");
+
+    if (mySidenav && main) {
+      mySidenav.style.width = "140px";
+      main.style.marginLeft = "140px";
+    }
+  }
+
   return (
     <div className="app">
       <Topbar />
       <div className="displayflex">
         <div className="slidebar">
-          <Sidebar />
+            <div id="mySidenav" className="sidenav">
+              
+              <Sidebar />
+              <p
+                className="closebtn"
+                onClick={closeNav}
+              >
+                Close
+              </p>
+            </div>
         </div>
-        <div className="main" style={{ width: "82%" }}>
+        <p style={{fontSize: 30, minHeight:"100vh", cursor: 'pointer', backgroundColor:"#020220", display:"flex", alignItems:"center", color:"rgba(255, 172, 105, 1)"}} onClick={openNav}>{">"}</p>
+        <div className="main" id="main" style={{ width: "82%" }}>
           <div className="row">
             <p style={{ color: "#FFAC69" }}>
               <a
@@ -549,237 +577,243 @@ function Chitiethopdonguyquyen() {
                 {/*TAB 2*/}
                 <div id="tab2" className="tab-slider--body">
                   <div
-            className="row test1"
-            style={{ width: "110%", marginBottom: "10px" }}
-          >
-            <div className="col-2 theloai">
-              Tình trạng phê duyệt:
-              <div className="dropdown-center dropdownhome">
-                <button
-                  className="btn dropdown-toggle dropdownbutton"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ width: "100%" }}
-                >
-                  Tất cả
-                </button>
-                <ul className="dropdown-menu" style={{ width: "100%" }}>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Tất cả
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Còn thời hạn
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Hết hạn
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-6"></div>
-            <div className="col-2">
-            <form className="d-flex mt-3 search" role="search">
-              <input
-                className="form-control me-2 labelsearch bg-transparent focus:bg-transparent border-none hover:bg-transparent placeholder:text-[#727288] focus:ring-0 h-full text-base font-normal font-['Montserrat'] leading-normal"
-                type="search"
-                placeholder="Tên bản ghi, ca sĩ,..."
-                aria-label="Search"
-              />
-              <button
-                className="searchicon"
-                type="button"
-                style={{ background: "none", border: "none", color: "white" }}
-              >
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </button>
-            </form>
-            </div>
-          </div>
-          <div className="row sanpham" style={{ width: "100%" }}>
-            <div className="sanphamchitiet">
-              <table>
-                <thead style={{lineHeight:"60px"}}>
-                  <tr
-                    style={{
-                      fontSize: "13px",
-                      lineHeight: "50px",
-                      fontWeight: "700",
-                      color: "#FFAC69",
-                    }}
+                    className="row test1"
+                    style={{ width: "110%", marginBottom: "10px" }}
                   >
-                    <td width={"80px"}>STT</td>
-                    <td width={"300px"}>Tên bản ghi</td>
-                    <td width={"200px"}>Mã ISRC</td>
-                    <td width={"240px"}>Ca sĩ</td>
-                    <td width={"240px"}>Tác giả</td>
-                    <td width={"240px"}>Ngày tải</td>
-                    <td width={"240px"}>Tình trạng</td>
-                    <td width={"100px"}></td>
-                  </tr>
-                </thead>
-                <tbody>
-                
-                  {filteredData.map((data,index) => (
-                    <tr
-                      key={index}
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontSize: "13px",
-                        lineHeight: "30px",
-                      }}
+                    <div className="col-2 theloai">
+                      Tình trạng phê duyệt:
+                      <div className="dropdown-center dropdownhome">
+                        <button
+                          className="btn dropdown-toggle dropdownbutton"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          style={{ width: "100%" }}
+                        >
+                          Tất cả
+                        </button>
+                        <ul className="dropdown-menu" style={{ width: "100%" }}>
+                          <li>
+                            <a className="dropdown-item" href="#">
+                              Tất cả
+                            </a>
+                          </li>
+                          <li>
+                            <a className="dropdown-item" href="#">
+                              Còn thời hạn
+                            </a>
+                          </li>
+                          <li>
+                            <a className="dropdown-item" href="#">
+                              Hết hạn
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="col-6"></div>
+                    <div className="col-2">
+                      <form className="d-flex mt-3 search" role="search">
+                        <input
+                          className="form-control me-2 labelsearch bg-transparent focus:bg-transparent border-none hover:bg-transparent placeholder:text-[#727288] focus:ring-0 h-full text-base font-normal font-['Montserrat'] leading-normal"
+                          type="search"
+                          placeholder="Tên bản ghi, ca sĩ,..."
+                          aria-label="Search"
+                        />
+                        <button
+                          className="searchicon"
+                          type="button"
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: "white",
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                  <div className="row sanpham" style={{ width: "100%" }}>
+                    <div className="sanphamchitiet">
+                      <table>
+                        <thead style={{ lineHeight: "60px" }}>
+                          <tr
+                            style={{
+                              fontSize: "13px",
+                              lineHeight: "50px",
+                              fontWeight: "700",
+                              color: "#FFAC69",
+                            }}
+                          >
+                            <td width={"80px"}>STT</td>
+                            <td width={"300px"}>Tên bản ghi</td>
+                            <td width={"200px"}>Mã ISRC</td>
+                            <td width={"240px"}>Ca sĩ</td>
+                            <td width={"240px"}>Tác giả</td>
+                            <td width={"240px"}>Ngày tải</td>
+                            <td width={"240px"}>Tình trạng</td>
+                            <td width={"100px"}></td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filteredData.map((data, index) => (
+                            <tr
+                              key={index}
+                              style={{
+                                fontFamily: "Montserrat",
+                                fontSize: "13px",
+                                lineHeight: "30px",
+                              }}
+                            >
+                              <td>{index + 1}</td>
+                              <td>{data.TenBanGhi}</td>
+                              <td>{data.MaISRC}</td>
+                              <td>{data.CaSi}</td>
+                              <td>{data.TacGia}</td>
+                              <td>{data.NgayTai}</td>
+                              <td>{data.TinhTrang}</td>
+                              <td>
+                                <Link to={`#`} style={{ color: "#FF7506" }}>
+                                  Nghe
+                                </Link>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div
+                      className="sanphamchitiet"
+                      style={{ minHeight: "50px" }}
                     >
-                      <td >{index + 1}</td>
-                      <td >{data.TenBanGhi}</td>
-                      <td >{data.MaISRC}</td>
-                      <td >{data.CaSi}</td>
-                      <td >{data.TacGia}</td>
-                      <td >{data.NgayTai}</td>
-                      <td >{data.TinhTrang}</td>
-                      <td  >
-                        <Link to={`#`} style={{ color: "#FF7506" }}>Nghe</Link>
-                      </td>
-
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="sanphamchitiet" style={{ minHeight: "50px" }}>
-              <tr
-                style={{
-                  fontSize: "13px",
-                  lineHeight: "30px",
-                  fontWeight: "700",
-                  color: "#FFAC69",
-                  width: "100%",
-                }}
-              >
-                <td width={"18%"}>
-                  Hiển thị{" "}
-                  <input
-                    type="number"
-                    style={{
-                      background:
-                        "linear-gradient(0deg, #2B2B3F, #2B2B3F),linear-gradient(0deg, #FF7506, #FF7506)",
-                      width: "48.37px",
-                      height: "32px",
-                      padding: "6px, 16.19px, 5px, 16.19px",
-                      borderRadius: "4px",
-                      border: "1px solid #FF7506",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                    min={10}
-                    max={20}
-                    defaultValue={10}
-                  />
-                  hàng trong mỗi trang
-                </td>
-                <td width={"48%"}></td>
-                <td width={"10%"}>
-                  <nav aria-label="...">
-                    <ul className="pagination">
-                      <li className="page-item">
-                        <a
-                          className="page-link"
-                          href="1"
-                          style={{ background: "none", border: "none" }}
-                        >
-                          <img src={buttonrtolRef} alt="" />{" "}
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          className="page-link"
-                          href="1"
-                          style={{
-                            background: "none",
-                            border: "none",
-                            color: "rgb(245 245 254 / 56%)",
-                          }}
-                        >
-                          1
-                        </a>
-                      </li>
-                      <li className="page-item" aria-current="page">
-                        <a
-                          className="page-link"
-                          href="#"
-                          style={{
-                            backgroundColor: "#FF750680",
-                            border: "none",
-                            color: "#F5F5FF",
-                            borderRadius: "50px",
-                            height: "40px",
-                            width: "40px",
-                            textAlign: "center",
-                          }}
-                        >
-                          2
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          className="page-link"
-                          href="#"
-                          style={{
-                            background: "none",
-                            border: "none",
-                            color: "rgb(245 245 254 / 56%)",
-                          }}
-                        >
-                          3
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          className="page-link disabled"
-                          href="#"
-                          style={{
-                            background: "none",
-                            border: "none",
-                            color: "rgb(245 245 254 / 56%)",
-                          }}
-                        >
-                          ...
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          className="page-link"
-                          href="#"
-                          style={{
-                            background: "none",
-                            border: "none",
-                            color: "rgb(245 245 254 / 56%)",
-                          }}
-                        >
-                          100
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          className="page-link"
-                          href="#"
-                          style={{ background: "none", border: "none" }}
-                        >
-                          <img src={buttonltorRef} alt="" />
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </td>
-              </tr>
-            </div>
-          </div>
-                  
+                      <tr
+                        style={{
+                          fontSize: "13px",
+                          lineHeight: "30px",
+                          fontWeight: "700",
+                          color: "#FFAC69",
+                          width: "100%",
+                        }}
+                      >
+                        <td width={"18%"}>
+                          Hiển thị{" "}
+                          <input
+                            type="number"
+                            style={{
+                              background:
+                                "linear-gradient(0deg, #2B2B3F, #2B2B3F),linear-gradient(0deg, #FF7506, #FF7506)",
+                              width: "48.37px",
+                              height: "32px",
+                              padding: "6px, 16.19px, 5px, 16.19px",
+                              borderRadius: "4px",
+                              border: "1px solid #FF7506",
+                              color: "white",
+                              textAlign: "center",
+                            }}
+                            min={10}
+                            max={20}
+                            defaultValue={10}
+                          />
+                          hàng trong mỗi trang
+                        </td>
+                        <td width={"48%"}></td>
+                        <td width={"10%"}>
+                          <nav aria-label="...">
+                            <ul className="pagination">
+                              <li className="page-item">
+                                <a
+                                  className="page-link"
+                                  href="1"
+                                  style={{ background: "none", border: "none" }}
+                                >
+                                  <img src={buttonrtolRef} alt="" />{" "}
+                                </a>
+                              </li>
+                              <li className="page-item">
+                                <a
+                                  className="page-link"
+                                  href="1"
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                    color: "rgb(245 245 254 / 56%)",
+                                  }}
+                                >
+                                  1
+                                </a>
+                              </li>
+                              <li className="page-item" aria-current="page">
+                                <a
+                                  className="page-link"
+                                  href="#"
+                                  style={{
+                                    backgroundColor: "#FF750680",
+                                    border: "none",
+                                    color: "#F5F5FF",
+                                    borderRadius: "50px",
+                                    height: "40px",
+                                    width: "40px",
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  2
+                                </a>
+                              </li>
+                              <li className="page-item">
+                                <a
+                                  className="page-link"
+                                  href="#"
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                    color: "rgb(245 245 254 / 56%)",
+                                  }}
+                                >
+                                  3
+                                </a>
+                              </li>
+                              <li className="page-item">
+                                <a
+                                  className="page-link disabled"
+                                  href="#"
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                    color: "rgb(245 245 254 / 56%)",
+                                  }}
+                                >
+                                  ...
+                                </a>
+                              </li>
+                              <li className="page-item">
+                                <a
+                                  className="page-link"
+                                  href="#"
+                                  style={{
+                                    background: "none",
+                                    border: "none",
+                                    color: "rgb(245 245 254 / 56%)",
+                                  }}
+                                >
+                                  100
+                                </a>
+                              </li>
+                              <li className="page-item">
+                                <a
+                                  className="page-link"
+                                  href="#"
+                                  style={{ background: "none", border: "none" }}
+                                >
+                                  <img src={buttonltorRef} alt="" />
+                                </a>
+                              </li>
+                            </ul>
+                          </nav>
+                        </td>
+                      </tr>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

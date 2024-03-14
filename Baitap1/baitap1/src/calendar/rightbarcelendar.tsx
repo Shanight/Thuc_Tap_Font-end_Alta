@@ -11,7 +11,7 @@ import {
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase";
 import "firebase/firestore";
-import "../Home/Home.css";
+import "../Khobanghi/Home.css";
 const auth = getAuth();
 
 function Rightbarcelendar() {

@@ -114,6 +114,20 @@ function Rightbar() {
   const handleTogglePassword2 = () => {
     setShowPassword2(!showPassword2);
   };
+
+  const fileInput = document.getElementById(
+    "image-upload"
+  ) as HTMLInputElement | null;
+  const imageNameElement = document.getElementById(
+    "image-name"
+  ) as HTMLSpanElement | null;
+
+  fileInput?.addEventListener("change", function (event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (imageNameElement) {
+      imageNameElement.textContent = file?.name ?? null;
+    }
+  });
   //end hiện password
   return (
     <div className="app">
@@ -147,7 +161,7 @@ function Rightbar() {
             <div
               className="modal-content"
               style={{
-                height: "524px",
+                height: "624px",
                 borderRadius: "16px",
                 padding: "32px, 40px, 40px, 40px",
                 background: "#3E3E5B",
@@ -259,7 +273,30 @@ function Rightbar() {
                       required
                     />
                   </div>
-
+                  <div className="col-6" style={{marginTop:"20px"}}>
+                    Đính kèm bản ghi:
+                    <div className="custom-file-label">
+                      <input
+                        type="file"
+                        name=""
+                        id="dinhkembanghi1"
+                        className="custom-file-input"
+                      />
+                      <label htmlFor="dinhkembanghi1">Tải lên</label>
+                    </div>
+                  </div>
+                  <div className="col-6"style={{marginTop:"20px"}}>
+                    Đính kèm lời bài hát:
+                    <div className="custom-file-label">
+                      <input
+                        type="file"
+                        name=""
+                        id="loibaihat1"
+                        className="custom-file-input"
+                      />
+                      <label htmlFor="loibaihat1">Tải lên</label>
+                    </div>
+                  </div>
                   <div className="col-12 p-3">
                     <button
                       type="button"
@@ -276,14 +313,18 @@ function Rightbar() {
                     >
                       Hủy
                     </button>
-                    <button className="btn btn-primary" type="submit"style={{
-                      backgroundColor: "#FF7506",
-                      color: "white",
-                      width: "168px",
-                      height: "48px",
-                      borderRadius: "8px",
-                      marginLeft:"10px"
-                    }}>
+                    <button
+                      className="btn btn-primary"
+                      type="submit"
+                      style={{
+                        backgroundColor: "#FF7506",
+                        color: "white",
+                        width: "168px",
+                        height: "48px",
+                        borderRadius: "8px",
+                        marginLeft: "10px",
+                      }}
+                    >
                       Tải lên
                     </button>
                   </div>

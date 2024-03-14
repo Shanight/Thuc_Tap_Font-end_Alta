@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { onAuthStateChanged} from "firebase/auth";
 import { auth } from "./firebase";
-import Home from "./Home/Home";
+import Home from "./Khobanghi/Home";
 import Login from "./Login/login";
 import Playlist from "./playlist/Playlist";
 import Calendar from "./calendar/calendar";

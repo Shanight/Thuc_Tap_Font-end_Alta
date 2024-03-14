@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Home from './Home/Home';
+import Home from './Khobanghi/Home';
 import reportWebVitals from './reportWebVitals';
 import Login from './Login/login';
 import AppRouter from './Login/AppRouter';

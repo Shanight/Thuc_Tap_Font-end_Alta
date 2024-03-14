@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Home from "../Home/Home";
+import Home from "../Khobanghi/Home";
 import Login from "./login";
 
 const AppRouter = () => {

@@ -100,7 +100,8 @@ const Sidebar = () => {
       path === "/quanlyhopdong" ||
         path === "/quanlythietbi" ||
         path === "/quanlyuyquyen" ||
-        path === "/quanlysudung"
+        path === "/quanlysudung" ||
+        path === "/quanlyhopdong/chitiet"
     );
     setIsDoanhThuClicked(
       path === "/baocaodoanhthu" ||
@@ -120,9 +121,19 @@ const Sidebar = () => {
         path === "/feedback"
     );
   }, [location]);
+  function closeNav() {
+    const mySidenav = document.getElementById("mySidenav");
+    const main = document.getElementById("main");
+
+    if (mySidenav && main) {
+      mySidenav.style.width = "0";
+      main.style.marginLeft = "0";
+    }
+  }
 
   return (
     <div className="sidebar">
+      
       <div className="row side">
         <img src={logoUrl} alt="Logo" className="logohome" />
       </div>
@@ -335,6 +346,12 @@ const Sidebar = () => {
           </div>
         </ul>
       </div>
+      <p
+                className="closebtn"
+                onClick={closeNav}
+              >
+                Close
+              </p>
     </div>
   );
 };
