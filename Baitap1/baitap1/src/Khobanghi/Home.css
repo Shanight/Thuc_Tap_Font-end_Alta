@@ -4,8 +4,7 @@
   color: white;
 }
 
-.sidebar {
-}
+.sidebar {}
 
 .main {
   margin-top: 3%;
@@ -16,64 +15,128 @@
   display: flex;
 }
 
-.search{
+.search {
   background-color: rgb(43, 43, 63);
   width: 390px;
   border-radius: 10px;
 }
 
-.theloai{
+.theloai {
   align-items: center;
-    justify-content: left;
-    display: flex;
+  justify-content: left;
+  display: flex;
 
 }
-.iconhome{
+
+.iconhome {
   justify-content: right;
 }
-.iconhomeicon{
+
+.iconhomeicon {
   font-size: 32px;
   margin-left: 15px;
   color: rgb(255, 117, 6);
 }
-.dropdownhome{
+
+.dropdownhome {
   margin-left: 10px;
 }
-.dropdownbutton{
+
+.dropdownbutton {
   background: none;
   border: 1px solid rgb(255, 117, 6);
   color: white;
 }
-.dropdownbutton:focus{
+
+.dropdownbutton:focus {
   background: none;
   border: 1px solid rgb(255, 117, 6);
   color: white;
 }
-.test1{
+
+.test1 {
   margin-top: 15px;
 }
-.sanpham{
+
+.sanpham {
   background-color: rgb(43, 43, 63);
   width: 88%;
   border-radius: 10px;
-  width:  722px;
-  
+  width: 722px;
+
 }
-.sanphamchitiet{
+
+.sanphamchitiet {
   padding: 16px, 24px, 16px, 24px;
   margin-top: 10px;
 }
-::placeholder { 
-  color: white !important ;    /* Firefox, Chrome, Opera */
+
+::placeholder {
+  color: white !important;
+  /* Firefox, Chrome, Opera */
 }
-.sliderighthome{
+
+.sliderighthome {
   background-color: rgb(47, 47, 65);
-    text-align: center;
-    position: fixed;
-    top: 188px;
-    left: 10;
-    right: 0;
-    z-index: 9999;
-    width: 110px;
-    border-radius: 16px 0 0 16px;
+  text-align: center;
+  position: fixed;
+  top: 188px;
+  left: 10;
+  right: 0;
+  z-index: 9999;
+  width: 110px;
+  border-radius: 16px 0 0 16px;
+}
+
+.h1home {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.002em;
+  color: rgba(255, 117, 6, 1);
+  text-align: center;
+  padding-top: 32px;
+}
+
+.imgH {
+  width: 130px;
+  height: 130px;
+  border-radius: 100px;
+}
+
+.form1 {
+  text-align: left;
+  margin-top: 38px;
+}
+
+.nghehome {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.002em;
+  text-align: center;
+  color: rgba(255, 117, 6, 1);
+
+}
+
+.thuonghome {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  text-align: left;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 0;
+}
+.thuonghome1{
+font-family: Montserrat;
+font-size: 12px;
+font-weight: 400;
+line-height: 18px;
+letter-spacing: 0em;
+text-align: left;
+margin-top: 0;
 }

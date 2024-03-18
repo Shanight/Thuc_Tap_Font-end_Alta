@@ -107,26 +107,26 @@ h2 {
 
 .custom-file-input {
 	display: none;
-  }
-  
-  .custom-file-label {
-	width:  80px;
-height:  35px;
-padding: 8px, 16px, 8px, 16px;
-border-radius: 6px;
-border: 1px;
-gap: 4px;
-border: 1px solid rgba(255, 172, 105, 1);
-font-family: Montserrat;
-font-size: 14px;
-font-weight: 700;
-line-height: 20px;
-letter-spacing: 0.002em;
-text-align: center;
-display: flex;
-align-items: center;
-justify-content: center;
-color:rgba(255, 172, 105, 1);
+}
+
+.custom-file-label {
+	width: 80px;
+	height: 35px;
+	padding: 8px, 16px, 8px, 16px;
+	border-radius: 6px;
+	border: 1px;
+	gap: 4px;
+	border: 1px solid rgba(255, 172, 105, 1);
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.002em;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255, 172, 105, 1);
 
 
-  }
+}

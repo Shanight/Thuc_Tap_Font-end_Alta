@@ -38,6 +38,9 @@ function Home() {
       .catch((error) => {
         console.log("Error getting URLs:", error);
       });
+
+
+    
   }, []);
 
   const navigate = useNavigate();
@@ -54,6 +57,8 @@ function Home() {
       }
     });
 
+
+    
     return () => {
       unsubscribe(); // Hủy đăng ký lắng nghe khi component bị hủy
     };
@@ -70,6 +75,7 @@ function Home() {
         console.log(error);
       });
   };
+
 
   //hieuung
   const [activeTab, setActiveTab] = useState("tab1");
@@ -2387,9 +2393,6 @@ function Home() {
               </div>
             </div>
           </div>
-
-          <div>Welcome, {user ? user.email : ""}</div>
-          <button onClick={handleSignOut}>Đăng xuất</button>
         </div>
         <div className="slideright">
           <Rightbarhome />

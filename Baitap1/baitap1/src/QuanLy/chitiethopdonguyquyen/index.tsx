@@ -181,17 +181,6 @@ function Chitiethopdonguyquyen() {
     };
   }, [navigate]);
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Đăng xuất thành công
-        navigate("/login"); // Chuyển hướng đến trang "Login"
-      })
-      .catch((error) => {
-        // Xử lý lỗi nếu có
-        console.log(error);
-      });
-  };
   //hieuung
   const [activeTab, setActiveTab] = useState("tab1");
   const handleTabClick = (tabId: string) => {
@@ -232,18 +221,27 @@ function Chitiethopdonguyquyen() {
       <Topbar />
       <div className="displayflex">
         <div className="slidebar">
-            <div id="mySidenav" className="sidenav">
-              
-              <Sidebar />
-              <p
-                className="closebtn"
-                onClick={closeNav}
-              >
-                Close
-              </p>
-            </div>
+          <div id="mySidenav" className="sidenav">
+            <Sidebar />
+            <p className="closebtn" onClick={closeNav}>
+              Close
+            </p>
+          </div>
         </div>
-        <p style={{fontSize: 30, minHeight:"100vh", cursor: 'pointer', backgroundColor:"#020220", display:"flex", alignItems:"center", color:"rgba(255, 172, 105, 1)"}} onClick={openNav}>{">"}</p>
+        <p
+          style={{
+            fontSize: 30,
+            minHeight: "100vh",
+            cursor: "pointer",
+            backgroundColor: "#020220",
+            display: "flex",
+            alignItems: "center",
+            color: "rgba(255, 172, 105, 1)",
+          }}
+          onClick={openNav}
+        >
+          {">"}
+        </p>
         <div className="main" id="main" style={{ width: "82%" }}>
           <div className="row">
             <p style={{ color: "#FFAC69" }}>

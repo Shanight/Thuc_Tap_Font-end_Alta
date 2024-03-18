@@ -31,6 +31,8 @@ import Feedback from "./HoTro/Feedback";
 import Register from "./Login/register";
 import Chitiethopdonguyquyen from "./QuanLy/chitiethopdonguyquyen";
 import Themhopdonguyquyen from "./QuanLy/chitiethopdonguyquyen/create";
+import Capnhatbanghi from "./Khobanghi/Capnhatbanghi";
+import Pheduyetbanghi from "./Khobanghi/Pheduyetbanghi";
 
 function App() {
   useEffect(() => {
@@ -77,6 +79,9 @@ function App() {
         <Route path="/huongdansudung" element={<HuongDanSuDung />} />
         <Route path="/taiapp" element={<TaiApp />} />
         <Route path="/feedback" element={<Feedback />} />
+
+        <Route path="/khobanghi/capnhat" element={<Capnhatbanghi />} />
+        <Route path="/khobanghi/pheduyetbanghi" element={<Pheduyetbanghi />} />
         <Route
           path="*"
           element={
