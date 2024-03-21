@@ -242,7 +242,7 @@ function Chitiethopdonguyquyen() {
         >
           {">"}
         </p>
-        <div className="main" id="main" style={{ width: "82%" }}>
+        <div className="main" id="main" style={{ width: "82%",}}>
           <div className="row">
             <p style={{ color: "#FFAC69" }}>
               <a

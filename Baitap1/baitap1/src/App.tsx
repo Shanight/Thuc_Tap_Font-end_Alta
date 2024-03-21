@@ -33,7 +33,8 @@ import Chitiethopdonguyquyen from "./QuanLy/chitiethopdonguyquyen";
 import Themhopdonguyquyen from "./QuanLy/chitiethopdonguyquyen/create";
 import Capnhatbanghi from "./Khobanghi/Capnhatbanghi";
 import Pheduyetbanghi from "./Khobanghi/Pheduyetbanghi";
-
+import ChiTietPlayList from "./playlist/ChiTietPlaylist";
+import ChinhsuaPlaylist from "./playlist/ChinhsuaPlaylist";
 function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -82,6 +83,9 @@ function App() {
 
         <Route path="/khobanghi/capnhat" element={<Capnhatbanghi />} />
         <Route path="/khobanghi/pheduyetbanghi" element={<Pheduyetbanghi />} />
+
+        <Route path="/playlist/chitiet" element={<ChiTietPlayList />} />
+        <Route path="/playlist/chitiet/chinhsua" element={<ChinhsuaPlaylist />} />
         <Route
           path="*"
           element={

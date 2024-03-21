@@ -317,7 +317,7 @@ function Home() {
                   </td>
                   <td width={"8%"}>
                     <a
-                      href="/capnhat"
+                      href="/khobanghi/capnhat"
                       style={{
                         color: "rgba(255, 117, 6, 1)",
                         textDecoration: "none",
